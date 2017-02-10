@@ -10,29 +10,6 @@ using System.Data.Entity;
 
 namespace F5QI.SMS.Web.Models
 {
-    public class SMSRole : IdentityRole<long, SMSUserRole>
-    {
-
-    }
-    public class SMSUserLogin : IdentityUserLogin<long>
-    {
-
-    }
-    public class SMSUserRole : IdentityUserRole<long>
-    {
-    }
-    public class SMSUserClaim : IdentityUserClaim<long>
-    {
-
-    }
-     
-    public class SMSUserStore : UserStore<SMSUser, SMSRole, long, SMSUserLogin, SMSUserRole, SMSUserClaim>
-    {
-        public SMSUserStore(DbContext context) : base(context)
-        {
-        }
-    }
-
     public class SMSUser : IdentityUser<long, SMSUserLogin, SMSUserRole, SMSUserClaim>
     {
         public async Task<ClaimsIdentity> GenerateUserIdentityAsync(SMSUserManager manager)
@@ -43,4 +20,16 @@ namespace F5QI.SMS.Web.Models
             return userIdentity;
         }
     }
+
+    public class SMSRole : IdentityRole<long, SMSUserRole> { }
+    public class SMSUserLogin : IdentityUserLogin<long> { }
+    public class SMSUserRole : IdentityUserRole<long> { }
+    public class SMSUserClaim : IdentityUserClaim<long> { }     
+    public class SMSUserStore : UserStore<SMSUser, SMSRole, long, SMSUserLogin, SMSUserRole, SMSUserClaim>
+    {
+        public SMSUserStore(DbContext context) : base(context)
+        {
+        }
+    }
+
 }
