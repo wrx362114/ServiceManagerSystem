@@ -6,12 +6,36 @@ using Microsoft.AspNet.Identity.EntityFramework;
 using System.Threading.Tasks;
 using System.Security.Claims;
 using Microsoft.AspNet.Identity;
+using System.Data.Entity;
 
 namespace F5QI.SMS.Web.Models
 {
-    public class SMSUser : IdentityUser<long, IdentityUserLogin<long>, IdentityUserRole<long>, IdentityUserClaim<long>>
+    public class SMSRole : IdentityRole<long, SMSUserRole>
     {
-        public async Task<ClaimsIdentity> GenerateUserIdentityAsync(UserManager<SMSUser, long> manager)
+
+    }
+    public class SMSUserLogin : IdentityUserLogin<long>
+    {
+
+    }
+    public class SMSUserRole : IdentityUserRole<long>
+    {
+    }
+    public class SMSUserClaim : IdentityUserClaim<long>
+    {
+
+    }
+     
+    public class SMSUserStore : UserStore<SMSUser, SMSRole, long, SMSUserLogin, SMSUserRole, SMSUserClaim>
+    {
+        public SMSUserStore(DbContext context) : base(context)
+        {
+        }
+    }
+
+    public class SMSUser : IdentityUser<long, SMSUserLogin, SMSUserRole, SMSUserClaim>
+    {
+        public async Task<ClaimsIdentity> GenerateUserIdentityAsync(SMSUserManager manager)
         {
             // 请注意，authenticationType 必须与 CookieAuthenticationOptions.AuthenticationType 中定义的相应项匹配
             var userIdentity = await manager.CreateIdentityAsync(this, DefaultAuthenticationTypes.ApplicationCookie);

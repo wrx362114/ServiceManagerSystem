@@ -6,24 +6,24 @@ using System.Web;
 
 namespace F5QI.SMS.Web.Models
 {
-    public class SMSDbContent :
+    public class SMSDbContext :
         IdentityDbContext<
             SMSUser,
-            IdentityRole<long, IdentityUserRole<long>>,
+            SMSRole,
             long,
-            IdentityUserLogin<long>,
-            IdentityUserRole<long>,
-            IdentityUserClaim<long>
+            SMSUserLogin,
+            SMSUserRole,
+            SMSUserClaim
             >
     {
-        public SMSDbContent()
+        public SMSDbContext()
             : base("DefaultConnection")
         {
         }
 
-        public static SMSDbContent Create()
+        public static SMSDbContext Create()
         {
-            return new SMSDbContent();
+            return new SMSDbContext();
         }
     }
 }

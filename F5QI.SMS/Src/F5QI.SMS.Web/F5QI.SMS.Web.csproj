@@ -165,7 +165,7 @@
     </Compile>
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
-    <Compile Include="Models\SMSDbContent.cs" />
+    <Compile Include="Models\SMSDbContext.cs" />
     <Compile Include="Models\SMSUser.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
