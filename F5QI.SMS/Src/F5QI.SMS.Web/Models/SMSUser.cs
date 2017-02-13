@@ -19,12 +19,14 @@ namespace F5QI.SMS.Web.Models
             // 在此处添加自定义用户声明
             return userIdentity;
         }
+
+        public virtual ICollection<FieldGroups> InfoGroup { get; private set; }
     }
 
     public class SMSRole : IdentityRole<long, SMSUserRole> { }
     public class SMSUserLogin : IdentityUserLogin<long> { }
     public class SMSUserRole : IdentityUserRole<long> { }
-    public class SMSUserClaim : IdentityUserClaim<long> { }     
+    public class SMSUserClaim : IdentityUserClaim<long> { }
     public class SMSUserStore : UserStore<SMSUser, SMSRole, long, SMSUserLogin, SMSUserRole, SMSUserClaim>
     {
         public SMSUserStore(DbContext context) : base(context)
