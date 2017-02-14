@@ -34,5 +34,8 @@ namespace F5QI.SMS.Web.Models
 
         public virtual ICollection<ServiceDescription> Services { get; private set; }
 
-    } 
+        public string Name { get; set; }
+
+        public string Remark { get; set; }
+    }
 }
