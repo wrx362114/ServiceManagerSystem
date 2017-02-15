@@ -16,6 +16,10 @@ namespace F5QI.SMS.Web.Models
         public string Name { get; set; }
         public bool Required { get; set; }
         public virtual ICollection<FieldGroups> Groups { get; private set; }
+
+        public DateTime CreateTime { get; set; }
+
+        public DateTime UpdateTime { get; set; }
     }
     public enum FieldType
     {
@@ -37,5 +41,9 @@ namespace F5QI.SMS.Web.Models
         public string Remark { get; set; }
         public virtual ICollection<FieldDescription> Fields { get; private set; }
         public virtual ICollection<SMSUser> Users { get; private set; }
+
+        public DateTime CreateTime { get; set; }
+
+        public DateTime UpdateTime { get; set; }
     }
 }

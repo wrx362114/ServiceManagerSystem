@@ -22,6 +22,10 @@ namespace F5QI.SMS.Web.Models
         public string Config { get; set; }
         public string Remark { get; set; }
         public virtual ICollection<ServicePackage> Packages { get; private set; }
+
+        public DateTime CreateTime { get; set; }
+
+        public DateTime UpdateTime { get; set; }
     }
     /// <summary>
     /// 服务套餐
@@ -37,5 +41,9 @@ namespace F5QI.SMS.Web.Models
         public string Name { get; set; }
 
         public string Remark { get; set; }
+
+        public DateTime CreateTime { get; set; }
+
+        public DateTime UpdateTime { get; set; }
     }
 }

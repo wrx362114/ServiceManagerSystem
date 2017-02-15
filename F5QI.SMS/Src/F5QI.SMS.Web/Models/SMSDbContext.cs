@@ -137,6 +137,7 @@ namespace F5QI.SMS.Web.Models
                         .MapRightKey($"{nameof(ServiceDescription)}Id");
                 });
         }
+
         public static SMSDbContext Create()
         {
             return new SMSDbContext();
