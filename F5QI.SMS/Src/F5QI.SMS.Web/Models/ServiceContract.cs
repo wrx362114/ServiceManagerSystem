@@ -45,7 +45,7 @@ namespace F5QI.SMS.Web.Models
         /// </summary>
         public long ClerkId { get; set; }
 
-        public JobState State{ get; set; }
+        public JobState State { get; set; }
 
         public DateTime CreateTime { get; set; }
 
@@ -65,7 +65,9 @@ namespace F5QI.SMS.Web.Models
 
         public ServiceContract Contract { get; set; }
 
-        public decimal PaidAmount { get; set; }
+        public decimal Amount { get; set; }
+
+        public bool IsPaid { get; set; }
 
         public DateTime CreateTime { get; set; }
 
