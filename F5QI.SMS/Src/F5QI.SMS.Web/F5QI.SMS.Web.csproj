@@ -169,6 +169,7 @@
     <Compile Include="Models\FieldDescription.cs" />
     <Compile Include="Models\BaseModel.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
+    <Compile Include="Models\OperationRecord.cs" />
     <Compile Include="Models\PaymentRecord.cs" />
     <Compile Include="Models\ServiceContract.cs" />
     <Compile Include="Models\ServiceDescription.cs" />
