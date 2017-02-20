@@ -160,7 +160,27 @@ namespace F5QI.SMS.Web.Models
 
 
         public virtual IDbSet<PaymentRecord> PaymentRecords { get; set; }
+        private void BindPaymentRecord(DbModelBuilder modelBuilder)
+        {
+            var bind = modelBuilder.Entity<PaymentRecord>();
+            bind.HasKey(a => a.Id).Property(a => a.Id).HasDatabaseGeneratedOption(DatabaseGeneratedOption.Identity);
+            bind.Property(a => a.SecurityStamp).HasMaxLength(32).IsFixedLength().IsConcurrencyToken();
+
+            bind.Property(a => a.Amount).HasPrecision(20, 2);
+            bind.Property(a => a.ThirdPartyCode).IsVariableLength().IsUnicode().HasMaxLength(128);
+
+        }
+
         public virtual IDbSet<OperationRecord> OperationRecords { get; set; }
+        private void BindOperationRecord(DbModelBuilder modelBuilder)
+        {
+            var bind = modelBuilder.Entity<OperationRecord>();
+            bind.HasKey(a => a.Id).Property(a => a.Id).HasDatabaseGeneratedOption(DatabaseGeneratedOption.Identity);
+            bind.Property(a => a.SecurityStamp).HasMaxLength(32).IsFixedLength().IsConcurrencyToken();
+            
+            bind.Property(a => a.Params).IsVariableLength().IsUnicode().IsMaxLength();
+
+        }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
