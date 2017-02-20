@@ -6,11 +6,15 @@ using System.Web;
 
 namespace F5QI.SMS.Web.Models
 {
-    public interface BaseModel
+    public class BaseModel
     {
-        long Id { get; set; }
-        string SecurityStamp { get; set; }
-        DateTime CreateTime { get; set; }
-        DateTime UpdateTime { get; set; }
+        public BaseModel()
+        {
+            SecurityStamp = Guid.NewGuid().ToString();
+        }
+        public long Id { get; set; }
+        public string SecurityStamp { get; set; }
+        public DateTime CreateTime { get; set; }
+        public DateTime UpdateTime { get; set; }
     }
 }

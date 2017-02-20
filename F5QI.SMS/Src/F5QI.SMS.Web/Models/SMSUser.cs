@@ -21,6 +21,7 @@ namespace F5QI.SMS.Web.Models
         }
 
         public virtual ICollection<FieldGroups> InfoGroup { get; private set; }
+        public virtual ICollection<ServiceContractJobConfig> Jobs { get; private set; }
     }
 
     public class SMSRole : IdentityRole<long, SMSUserRole> { }

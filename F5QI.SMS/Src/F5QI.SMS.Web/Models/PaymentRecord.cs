@@ -7,13 +7,6 @@ namespace F5QI.SMS.Web.Models
 {
     public class PaymentRecord : BaseModel
     {
-        public long Id { get; set; }
-
-        public string SecurityStamp { get; set; }
-
-        public DateTime CreateTime { get; set; }
-
-        public DateTime UpdateTime { get; set; }
         public PaymentMethod Method { get; set; }
 
         public PaymentState State { get; set; }
@@ -22,9 +15,11 @@ namespace F5QI.SMS.Web.Models
 
         public decimal Amount { get; set; }
 
-        public string Code { get { return $"PaymentRecord_{Id}"; } }
+        public string Code { get { return $"F5QI.SMS.PaymentRecord_{Id}"; } }
 
         public string ThirdPartyCode { get; set; }
+        public long PaymentPlanId { get; set; }
+        public ServiceContractPaymentPlan PaymentPlan { get; set; }
     }
 
     public enum PaymentType

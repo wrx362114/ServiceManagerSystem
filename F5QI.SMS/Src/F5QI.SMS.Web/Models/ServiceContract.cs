@@ -7,15 +7,8 @@ namespace F5QI.SMS.Web.Models
 {
     public class ServiceContract : BaseModel
     {
-        public long Id { get; set; }
-
-        public string SecurityStamp { get; set; }
 
         public string Name { get; set; }
-
-        public DateTime UpdateTime { get; set; }
-
-        public DateTime CreateTime { get; set; }
 
         /// <summary>
         /// 甲方
@@ -29,60 +22,67 @@ namespace F5QI.SMS.Web.Models
 
         public decimal Amount { get; set; }
 
-        public virtual ICollection<ContractPaymentPlan> PaymentPlans { get; private set; }
+        public virtual ICollection<ServiceContractPaymentPlan> PaymentPlans { get; private set; }
 
-        public virtual ICollection<ServiceJobConfig> PlanJobs { get; private set; }
-        
+        public virtual ICollection<ServiceContractJobConfig> PlanJobs { get; private set; }
+
     }
 
-    public class ServiceJobConfig : BaseModel
+    public class ServiceContractJobConfig : BaseModel
     {
-        public long Id { get; set; }
-
-        public string SecurityStamp { get; set; }
-        public long ContractId { get; set; }
-        public long ServiceId { get; set; }
-        public string Config { get; set; }
         public DateTime StartTime { get; set; }
-
         public DateTime EndTime { get; set; }
 
+        public ServiceContract Contract { get; set; }
+        public long ContractId { get; set; }
+
+        public long ServiceId { get; set; }
+        public string Config { get; set; }
         /// <summary>
         /// 办事人ID
         /// </summary>
         public long ClerkId { get; set; }
 
+        public SMSUser Clerk { get; set; }
+
         public JobState State { get; set; }
 
-        public DateTime CreateTime { get; set; }
+        public JobType Type { get; set; }
+    }
 
-        public DateTime UpdateTime { get; set; }
+    public enum JobType
+    {
+    }
+
+    public class ServiceContractTemplate : BaseModel
+    {
+        public string Name { get; set; }
+
+        public ServiceContractTemplateType Type { get; set; }
+
+        public string Config { get; set; }
     }
 
 
-    public class ContractPaymentPlan : BaseModel
+    public class ServiceContractPaymentPlan : BaseModel
     {
-        public long Id { get; set; }
-
-        public string SecurityStamp { get; set; }
-
         public DateTime PlanPayTime { get; set; }
 
         public long ContractId { get; set; }
-
         public ServiceContract Contract { get; set; }
 
         public decimal Amount { get; set; }
 
         public bool IsPaid { get; set; }
 
-        public DateTime CreateTime { get; set; }
-
-        public DateTime UpdateTime { get; set; }
+        public virtual ICollection<PaymentRecord> Records { get; private set; } 
     }
 
 
-    public class JobState
+    public enum JobState
+    {
+    }
+    public enum ServiceContractTemplateType
     {
     }
 }
