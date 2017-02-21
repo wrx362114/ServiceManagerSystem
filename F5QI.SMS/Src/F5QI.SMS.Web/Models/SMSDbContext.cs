@@ -36,9 +36,9 @@ namespace F5QI.SMS.Web.Models
                 .WithMany(a => a.Fields)
                 .Map(a =>
                 {
-                    a.ToTable($"R_{nameof(FieldDescription)}_{nameof(FieldGroups)}")
+                    a.ToTable($"R_{nameof(FieldDescription)}_{nameof(Models.FieldGroups)}")
                         .MapLeftKey($"{nameof(FieldDescription)}Id")
-                        .MapRightKey($"{nameof(FieldGroups)}Id");
+                        .MapRightKey($"{nameof(Models.FieldGroups)}Id");
                 });
         }
 
@@ -55,8 +55,8 @@ namespace F5QI.SMS.Web.Models
                 .WithMany(a => a.InfoGroup)
                 .Map(a =>
                 {
-                    a.ToTable($"R_{nameof(FieldGroups)}_{nameof(SMSUser)}")
-                        .MapLeftKey($"{nameof(FieldGroups)}Id")
+                    a.ToTable($"R_{nameof(Models.FieldGroups)}_{nameof(SMSUser)}")
+                        .MapLeftKey($"{nameof(Models.FieldGroups)}Id")
                         .MapRightKey($"{nameof(SMSUser)}Id");
                 });
         }
@@ -115,11 +115,11 @@ namespace F5QI.SMS.Web.Models
             bind.HasMany(a => a.PaymentPlans)
                 .WithRequired(a => a.Contract)
                 .HasForeignKey(a => a.ContractId)
-                .WillCascadeOnDelete(true);
+                .WillCascadeOnDelete(false);
             bind.HasMany(a => a.PlanJobs)
                 .WithRequired(a => a.Contract)
                 .HasForeignKey(a => a.ContractId)
-                .WillCascadeOnDelete(true);
+                .WillCascadeOnDelete(false);
         }
 
         public virtual IDbSet<ServiceContractJobConfig> ServiceContractJobs { get; set; }
@@ -155,7 +155,7 @@ namespace F5QI.SMS.Web.Models
             bind.HasMany(a => a.Records)
                 .WithRequired(a => a.PaymentPlan)
                 .HasForeignKey(a => a.PaymentPlanId)
-                .WillCascadeOnDelete(true);
+                .WillCascadeOnDelete(false);
         }
 
 
@@ -177,7 +177,7 @@ namespace F5QI.SMS.Web.Models
             var bind = modelBuilder.Entity<OperationRecord>();
             bind.HasKey(a => a.Id).Property(a => a.Id).HasDatabaseGeneratedOption(DatabaseGeneratedOption.Identity);
             bind.Property(a => a.SecurityStamp).HasMaxLength(32).IsFixedLength().IsConcurrencyToken();
-            
+
             bind.Property(a => a.Params).IsVariableLength().IsUnicode().IsMaxLength();
 
         }
@@ -190,14 +190,18 @@ namespace F5QI.SMS.Web.Models
                 .HasMany(a => a.Jobs)
                 .WithOptional(a => a.Clerk)
                 .HasForeignKey(a => a.ClerkId)
-                .WillCascadeOnDelete(true);
+                .WillCascadeOnDelete(false);
             BindFields(modelBuilder);
-            BindFieldGroups(modelBuilder);
+            BindFieldGroups(modelBuilder); 
+            BindOperationRecord(modelBuilder);
+            BindPaymentRecord(modelBuilder);
+            BindServiceContract(modelBuilder);
+            BindServiceContractJobConfig(modelBuilder);
+            BindServiceContractPaymentPlan(modelBuilder);
+            BindServiceContractTemplate(modelBuilder);
+            BindServicePackage(modelBuilder);
+            BindServices(modelBuilder);
         }
-
-
-
-
 
         public static SMSDbContext Create()
         {
