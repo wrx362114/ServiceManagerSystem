@@ -23,7 +23,13 @@ namespace F5QI.SMS.Web.Areas.Admin.Controllers
 
         public ActionResult UserManege()
         {
-            return View();
+            var model = new UserManegeViewModel(this)
+            {
+                CurrentPage = "后台首页",
+                HeadImgUrl = "",
+                LoginUserName = "测试"
+            };
+            return View(model);
         }
     }
 }
