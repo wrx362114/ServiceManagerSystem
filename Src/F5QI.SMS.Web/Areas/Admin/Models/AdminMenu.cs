@@ -45,7 +45,7 @@ namespace F5QI.SMS.Web.Areas.Admin.Models
                         Child=new[] {
                             new MenuItem {
                                 Title="服务管理",
-                                Url=controller.Url.Action(nameof(Controllers.HomeController.UserManege)),
+                                Url=controller.Url.Action(nameof(Controllers.HomeController.ServiceManege)),
                                 IcoClass="fa fa-circle-o"
                             },
                             new MenuItem {
