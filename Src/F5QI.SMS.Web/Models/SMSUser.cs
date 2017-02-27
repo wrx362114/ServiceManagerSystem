@@ -21,10 +21,22 @@ namespace F5QI.SMS.Web.Models
         }
 
         public virtual ICollection<FieldGroups> InfoGroup { get; private set; }
-        public virtual ICollection<ServiceContractJobConfig> Jobs { get; private set; }
+        public virtual ICollection<ServiceContractJobConfig> ContractJobs { get; private set; }
+        public virtual ICollection<EnterpriseInfo> Enterprises { get; private set; }
+
+
     }
 
     public class SMSRole : IdentityRole<long, SMSUserRole> { }
+
+    public enum Roles
+    {
+        Unknow,
+        Admin,
+        Client,
+        Accountant
+    }
+
     public class SMSUserLogin : IdentityUserLogin<long> { }
     public class SMSUserRole : IdentityUserRole<long> { }
     public class SMSUserClaim : IdentityUserClaim<long> { }

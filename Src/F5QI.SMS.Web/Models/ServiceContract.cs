@@ -16,6 +16,11 @@ namespace F5QI.SMS.Web.Models
         public long FirstPartyUserId { get; set; }
 
         /// <summary>
+        /// 甲方
+        /// </summary>
+        public long FirstPartyEnterpriseId { get; set; }
+
+        /// <summary>
         /// 乙方
         /// </summary>
         public long SecondPartyUserId { get; set; }
@@ -26,6 +31,23 @@ namespace F5QI.SMS.Web.Models
 
         public virtual ICollection<ServiceContractJobConfig> PlanJobs { get; private set; }
 
+
+    }
+
+    public class ServiceContractServiceConfig : BaseModel
+    {
+        public long ContractId { get; set; }
+        public ServiceContract Contract { get; set; }
+        public long ServiceId { get; set; }
+        public ServiceDescription Service { get; set; }
+        public DateTime StartTime { get; set; }
+        public DateTime EndTime { get; set; }
+        public decimal Price { get; set; }
+    }
+    public class ServiceContractServicePackageConfig : BaseModel
+    {
+        public long ContractId { get; set; }
+        public ServiceContract Contract { get; set; }
     }
 
     public class ServiceContractJobConfig : BaseModel
@@ -50,9 +72,6 @@ namespace F5QI.SMS.Web.Models
         public JobType Type { get; set; }
     }
 
-    public enum JobType
-    {
-    }
 
     public class ServiceContractTemplate : BaseModel
     {
@@ -75,7 +94,7 @@ namespace F5QI.SMS.Web.Models
 
         public bool IsPaid { get; set; }
 
-        public virtual ICollection<PaymentRecord> Records { get; private set; } 
+        public virtual ICollection<PaymentRecord> Records { get; private set; }
     }
 
 
@@ -83,6 +102,9 @@ namespace F5QI.SMS.Web.Models
     {
     }
     public enum ServiceContractTemplateType
+    {
+    }
+    public enum JobType
     {
     }
 }

@@ -163,6 +163,7 @@
     <Compile Include="Areas\Admin\Models\BaseViewModel.cs" />
     <Compile Include="Areas\Admin\Models\AdminMenu.cs" />
     <Compile Include="Areas\Admin\Models\IndexViewModel.cs" />
+    <Compile Include="Areas\Admin\Models\ServiceManegeViewModel.cs" />
     <Compile Include="Areas\Admin\Models\UserManegeViewModel.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
@@ -172,6 +173,7 @@
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
+    <Compile Include="Models\EnterpriseInfo.cs" />
     <Compile Include="Models\FieldDescription.cs" />
     <Compile Include="Models\BaseModel.cs" />
     <Compile Include="Models\ManageViewModels.cs" />

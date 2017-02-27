@@ -71,6 +71,7 @@ namespace F5QI.SMS.Web.Models
             bind.Property(a => a.Name).IsVariableLength().IsUnicode().HasMaxLength(128);
             bind.Property(a => a.Remark).IsVariableLength().IsUnicode().HasMaxLength(2048);
             bind.Property(a => a.Config).IsVariableLength().IsUnicode().IsMaxLength();
+            bind.Property(a => a.Price).HasPrecision(18, 2);
 
             bind.HasMany(a => a.Packages)
                 .WithMany(a => a.Services)
@@ -150,7 +151,7 @@ namespace F5QI.SMS.Web.Models
             bind.HasKey(a => a.Id).Property(a => a.Id).HasDatabaseGeneratedOption(DatabaseGeneratedOption.Identity);
             bind.Property(a => a.SecurityStamp).HasMaxLength(32).IsFixedLength().IsConcurrencyToken();
 
-            bind.Property(a => a.Amount).HasPrecision(20, 2);
+            bind.Property(a => a.Amount).HasPrecision(18, 2);
 
             bind.HasMany(a => a.Records)
                 .WithRequired(a => a.PaymentPlan)
@@ -166,7 +167,7 @@ namespace F5QI.SMS.Web.Models
             bind.HasKey(a => a.Id).Property(a => a.Id).HasDatabaseGeneratedOption(DatabaseGeneratedOption.Identity);
             bind.Property(a => a.SecurityStamp).HasMaxLength(32).IsFixedLength().IsConcurrencyToken();
 
-            bind.Property(a => a.Amount).HasPrecision(20, 2);
+            bind.Property(a => a.Amount).HasPrecision(18, 2);
             bind.Property(a => a.ThirdPartyCode).IsVariableLength().IsUnicode().HasMaxLength(128);
 
         }
@@ -182,17 +183,32 @@ namespace F5QI.SMS.Web.Models
 
         }
 
+        public virtual IDbSet<EnterpriseInfo> Enterprises { get; set; }
+        private void BindEnterpriseInfo(DbModelBuilder modelBuilder)
+        {
+            var bind = modelBuilder.Entity<EnterpriseInfo>();
+            bind.HasKey(a => a.Id).Property(a => a.Id).HasDatabaseGeneratedOption(DatabaseGeneratedOption.Identity);
+            bind.Property(a => a.SecurityStamp).HasMaxLength(32).IsFixedLength().IsConcurrencyToken();
+
+            bind.Property(a => a.Name).IsVariableLength().IsUnicode().HasMaxLength(128);
+            bind.HasRequired(m => m.UserInfo)
+                .WithMany(m => m.Enterprises)
+                .HasForeignKey(m => m.UserId)
+                .WillCascadeOnDelete(false);
+
+        }
+
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
             modelBuilder
                 .Entity<SMSUser>()
-                .HasMany(a => a.Jobs)
+                .HasMany(a => a.ContractJobs)
                 .WithOptional(a => a.Clerk)
                 .HasForeignKey(a => a.ClerkId)
                 .WillCascadeOnDelete(false);
             BindFields(modelBuilder);
-            BindFieldGroups(modelBuilder); 
+            BindFieldGroups(modelBuilder);
             BindOperationRecord(modelBuilder);
             BindPaymentRecord(modelBuilder);
             BindServiceContract(modelBuilder);
