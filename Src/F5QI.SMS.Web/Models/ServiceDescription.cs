@@ -11,7 +11,7 @@ namespace F5QI.SMS.Web.Models
     }
 
     /// <summary>
-    /// 服务流程项目
+    /// 服务项目
     /// </summary>
     public class ServiceDescription : BaseModel
     {
@@ -19,6 +19,7 @@ namespace F5QI.SMS.Web.Models
         public string Name { get; set; }
         public string Config { get; set; }
         public string Remark { get; set; }
+        public decimal Price { get; set; }
         public virtual ICollection<ServicePackage> Packages { get; private set; }
     }
     /// <summary>

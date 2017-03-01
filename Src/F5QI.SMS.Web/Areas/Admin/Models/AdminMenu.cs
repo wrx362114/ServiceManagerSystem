@@ -22,12 +22,34 @@ namespace F5QI.SMS.Web.Areas.Admin.Models
                         IcoClass="fa fa-circle-o"
                     },
                     new MenuItem {
-                        Title="用户相关配置",
+                        Title="用户相关",
                         IcoClass="fa fa-users",
                         Url="#" ,
                         Child=new[] { 
                             new MenuItem {
                                 Title="用户管理",
+                                Url=controller.Url.Action(nameof(Controllers.HomeController.UserManege)),
+                                IcoClass="fa fa-circle-o"
+                            }
+                        }
+                    },
+                    new MenuItem {
+                        Title="合同管理",
+                        IcoClass="fa fa-users",
+                        Url="#"
+                    },
+                    new MenuItem {
+                        Title="系统设置",
+                        IcoClass="fa fa-users",
+                        Url="#" ,
+                        Child=new[] {
+                            new MenuItem {
+                                Title="服务管理",
+                                Url=controller.Url.Action(nameof(Controllers.HomeController.ServiceManege)),
+                                IcoClass="fa fa-circle-o"
+                            },
+                            new MenuItem {
+                                Title="套餐管理",
                                 Url=controller.Url.Action(nameof(Controllers.HomeController.UserManege)),
                                 IcoClass="fa fa-circle-o"
                             }
