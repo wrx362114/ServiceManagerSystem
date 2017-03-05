@@ -1,4 +1,31 @@
 ﻿
 @{
+    Layout = "../Shared/_adminlayout.cshtml";
+}
+<script>
+    function day4year( y, m, d ) {
+        var day4m = [31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31];
+        if ( y < 0 || m < 0 || d < 0 ) {
+            return -1;
+        }
+        if ( m > 12 ) {
+            return -1;
+        }
+        if ( d > day4m[m] ) {
+            return -1;
+        }
+        var rt = d;
+        for ( var i = 0; i < m; i++ ) {
+            rt += day4m[i];
+        }
+        if ( isLeapYear( y ) && m > 2 ) {
+            rt += 1;
+        }
+        return rt;
+    }
+    function isLeapYear( y ) {
+        return ( ( ( y % 4 ) == 0 ) && ( y % 100 ) != 0 ) || ( y % 400 == 0 );
+    }
+</script>
     Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
 } 
