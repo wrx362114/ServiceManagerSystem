@@ -204,7 +204,7 @@ namespace F5QI.SMS.Web.Models
             modelBuilder
                 .Entity<SMSUser>()
                 .HasMany(a => a.ContractJobs)
-                .WithOptional(a => a.Clerk)
+                .WithRequired(a => a.Clerk)
                 .HasForeignKey(a => a.ClerkId)
                 .WillCascadeOnDelete(false);
             BindFields(modelBuilder);

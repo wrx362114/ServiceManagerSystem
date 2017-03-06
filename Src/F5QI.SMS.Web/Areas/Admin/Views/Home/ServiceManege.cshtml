@@ -1,5 +1,6 @@
-﻿
+﻿@model F5QI.SMS.Web.Areas.Admin.Models.ServiceManegeViewModel
 @{
+
     ViewBag.Title = "ServiceManege";
     Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
 }
@@ -13,25 +14,26 @@
         <table class="ui compact celled definition table">
             <thead>
                 <tr>
-                    <th></th>
                     <th>名称</th>
                     <th>备注</th>
                     <th>参考价格</th>
                     <th>配置项目</th>
+                    <th>类型</th>
+                    <th>操作</th>
                 </tr>
             </thead>
             <tbody>
-                <tr>
-                    <td class="collapsing">
-                        <div class="ui fitted slider checkbox">
-                            <input type="checkbox"> <label></label>
-                        </div>
-                    </td>
-                    <td>John Lilki</td>
-                    <td>September 14, 2013</td>
-                    <td>jhlilk22@yahoo.com</td>
-                    <td>No</td>
-                </tr>
+                @foreach (var item in Model.Services)
+                {
+                    <tr>
+                        <td>@item.Name</td>
+                        <td>@item.Remark</td>
+                        <td>@item.Price</td>
+                        <td>@item.Config</td>
+                        <td>@item.Type.ToString()</td>
+                        <td><a href="#">删除</a><a href="#">修改</a></td>
+                    </tr>
+                }
                 <tr>
                     <td class="collapsing">
                         <div class="ui fitted slider checkbox">
@@ -43,23 +45,12 @@
                     <td>jamieharingonton@yahoo.com</td>
                     <td>Yes</td>
                 </tr>
-                <tr>
-                    <td class="collapsing">
-                        <div class="ui fitted slider checkbox">
-                            <input type="checkbox"> <label></label>
-                        </div>
-                    </td>
-                    <td>Jill Lewis</td>
-                    <td>May 11, 2014</td>
-                    <td>jilsewris22@yahoo.com</td>
-                    <td>Yes</td>
-                </tr>
             </tbody>
             <tfoot class="full-width">
                 <tr>
                     <th></th>
-                    <th colspan="4">
-                        <div class="ui small primary labeled icon button">
+                    <th colspan="5">
+                        <div class="ui small primary labeled icon button" onclick="OpenAdd()">
                             <i class="user icon"></i> Add User
                         </div>
                         <div class="ui small button">
@@ -85,5 +76,24 @@
             </tfoot>
         </table>
     </div>
+    <div class="ui fullscreen modal">
+        <div class="header">Header</div>
+        <div class="content">
+            <p></p>
+        </div>
+        <div class="actions">
+            <div class="ui approve button">Approve</div>
+            <div class="ui button">Neutral</div>
+            <div class="ui cancel button">Cancel</div>
+        </div>
+    </div> 
     <!-- /.box-body -->
 </div>
+@section scripts{
+    <script>
+        function OpenAdd()
+        {
+            $( '.fullscreen.modal' ).modal( 'show' );
+        }
+    </script>
+}
