@@ -7,6 +7,7 @@ namespace F5QI.SMS.Web.Models
 {
     public enum ServiceType
     {
+        Unknown,
 
     }
 
