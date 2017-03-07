@@ -11,9 +11,9 @@
     </div>
     <!-- /.box-header -->
     <div class="box-body">
-        <table class="ui compact celled definition table">
+        <table class="ui compact celled table">
             <thead>
-                <tr>
+                <tr> 
                     <th>名称</th>
                     <th>备注</th>
                     <th>参考价格</th>
@@ -50,7 +50,7 @@
                 <tr>
                     <th></th>
                     <th colspan="5">
-                        <div class="ui small primary labeled icon button" onclick="OpenAdd()">
+                        <div class="ui small primary labeled icon button" >
                             <i class="user icon"></i> Add User
                         </div>
                         <div class="ui small button">
@@ -76,24 +76,9 @@
             </tfoot>
         </table>
     </div>
-    <div class="ui fullscreen modal">
-        <div class="header">Header</div>
-        <div class="content">
-            <p></p>
-        </div>
-        <div class="actions">
-            <div class="ui approve button">Approve</div>
-            <div class="ui button">Neutral</div>
-            <div class="ui cancel button">Cancel</div>
-        </div>
-    </div> 
     <!-- /.box-body -->
 </div>
 @section scripts{
     <script>
-        function OpenAdd()
-        {
-            $( '.fullscreen.modal' ).modal( 'show' );
-        }
     </script>
 }
