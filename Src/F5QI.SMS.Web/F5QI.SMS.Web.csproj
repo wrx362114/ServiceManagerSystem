@@ -195,8 +195,7 @@
     <Compile Include="Startup.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Content\docs.css" />
-    <Content Include="Content\home.css" />
+    <Content Include="Content\Admin\home.css" />
     <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
@@ -245,9 +244,8 @@
     <Content Include="packages.config" />
     <Content Include="Areas\Admin\Views\web.config" />
     <Content Include="Areas\Admin\Views\Home\Index.cshtml" />
-    <Content Include="Areas\Admin\Views\Shared\_AdminLayout.cshtml" />
     <Content Include="Areas\Admin\Views\Home\ServiceManege.cshtml" />
-    <Content Include="Areas\Admin\Views\Shared\_AdminLayout - 复制.cshtml" />
+    <Content Include="Areas\Admin\Views\Shared\_Admin1Layout.cshtml" />
     <None Include="Project_Readme.html" />
     <None Include="Properties\PublishProfiles\Default Settings.pubxml" />
   </ItemGroup>
