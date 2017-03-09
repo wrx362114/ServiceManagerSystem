@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Web;
 
@@ -7,6 +8,7 @@ namespace F5QI.SMS.Web.Models
 {
     public enum ServiceType
     {
+        [Display(Name = "未知")]
         Unknown,
 
     }

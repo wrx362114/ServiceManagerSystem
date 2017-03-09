@@ -1,4 +1,5 @@
 ﻿using F5QI.SMS.Web.Areas.Admin.Models;
+using F5QI.SMS.Web.Common;
 using F5QI.SMS.Web.Models;
 using System;
 using System.Collections.Generic;
@@ -31,6 +32,7 @@ namespace F5QI.SMS.Web.Areas.Admin.Controllers
         }
         public ActionResult ServiceManege(int pageindex = 1, int pagesize = 20)
         {
+            Tools.Enum2NameValueList(typeof(Web.Models.ServiceType)).ToList();
             var ros = Db.Services.OrderByDescending(a=>a.Id).Skip((pageindex - 1) * pagesize).Take(pagesize);
             var model = new ServiceManegeViewModel(this)
             {

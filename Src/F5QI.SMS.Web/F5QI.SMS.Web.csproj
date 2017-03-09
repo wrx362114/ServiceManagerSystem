@@ -173,6 +173,7 @@
     <Compile Include="Areas\Admin\Models\IndexViewModel.cs" />
     <Compile Include="Areas\Admin\Models\ServiceManegeViewModel.cs" />
     <Compile Include="Areas\Admin\Models\UserManegeViewModel.cs" />
+    <Compile Include="Common\Tools.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />

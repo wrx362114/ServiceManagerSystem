@@ -93,6 +93,20 @@
                     <label>价格</label>
                     <input type="text" name="last-name" placeholder="Last Name">
                 </div>
+                <div class="field">
+                    <label>服务类型</label>
+                    <div class="ui selection dropdown">
+                        <input type="hidden" name="gender">
+                        <i class="dropdown icon"></i>
+                        <div class="default text">请选择</div>
+                        <div class="menu">
+                            @foreach (var item in F5QI.SMS.Web.Common.Tools.Enum2NameValueList(typeof(F5QI.SMS.Web.Models.ServiceType)))
+                            {
+                                <div class="item" data-value="@item.Key">@item.Value</div>
+                            }
+                        </div>
+                    </div>
+                </div>
                 <button class="ui button" type="submit">Submit</button>
             </form>
         </div>
@@ -110,9 +124,9 @@
 </div>
 @section scripts{
     <script>
-        function OpenAdd()
-        {
+        function OpenAdd() {
             $( '.ui.modal' ).modal( 'show' );
         }
+        $( '.selection.dropdown' ).dropdown();
     </script>
 }
