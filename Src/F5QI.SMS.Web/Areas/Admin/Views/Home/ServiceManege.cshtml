@@ -5,15 +5,13 @@
     Layout = "~/Areas/Admin/Views/Shared/_Admin1Layout.cshtml";
 }
 
-@*<div class="box">
-    <div class="box-header">
-        <h3 class="box-title">Hover Data Table</h3>
-    </div>
+<div class="box">
     <!-- /.box-header -->
     <div class="box-body">
-        <table class="ui compact celled table">
+        <table class="ui compact celled definition table">
             <thead>
-                <tr> 
+                <tr>
+                    <th></th>
                     <th>名称</th>
                     <th>备注</th>
                     <th>参考价格</th>
@@ -50,7 +48,7 @@
                 <tr>
                     <th></th>
                     <th colspan="5">
-                        <div class="ui small primary labeled icon button" >
+                        <div class="ui small primary labeled icon button" onclick="OpenAdd()">
                             <i class="user icon"></i> Add User
                         </div>
                         <div class="ui small button">
@@ -76,9 +74,45 @@
             </tfoot>
         </table>
     </div>
+    <div class="ui modal">
+        <i class="close icon"></i>
+        <div class="header">
+            添加服务
+        </div>
+        <div class="content">
+            <form class="ui form">
+                <div class="field">
+                    <label>服务名称</label>
+                    <input type="text" name="first-name" placeholder="First Name">
+                </div>
+                <div class="field">
+                    <label>备注</label>
+                    <input type="text" name="last-name" placeholder="Last Name">
+                </div>
+                <div class="field">
+                    <label>价格</label>
+                    <input type="text" name="last-name" placeholder="Last Name">
+                </div>
+                <button class="ui button" type="submit">Submit</button>
+            </form>
+        </div>
+        <div class="actions">
+            <div class="ui black deny button">
+                Nope
+            </div>
+            <div class="ui positive right labeled icon button">
+                Yep, that's me
+                <i class="checkmark icon"></i>
+            </div>
+        </div>
+    </div>
     <!-- /.box-body -->
 </div>
 @section scripts{
     <script>
+        function OpenAdd()
+        {
+            $( '.ui.modal' ).modal( 'show' );
+        }
     </script>
-}*@
+}
