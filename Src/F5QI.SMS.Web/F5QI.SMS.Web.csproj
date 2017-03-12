@@ -161,6 +161,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Apitrollers\ServicesController.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\IdentityConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
@@ -173,6 +174,8 @@
     <Compile Include="Areas\Admin\Models\IndexViewModel.cs" />
     <Compile Include="Areas\Admin\Models\ServiceManegeViewModel.cs" />
     <Compile Include="Areas\Admin\Models\UserManegeViewModel.cs" />
+    <Compile Include="Common\ApiResult.cs" />
+    <Compile Include="Common\HtmlHelper.cs" />
     <Compile Include="Common\Tools.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
@@ -180,8 +183,13 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201703121240072_init.cs" />
+    <Compile Include="Migrations\201703121240072_init.Designer.cs">
+      <DependentUpon>201703121240072_init.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
+    <Compile Include="Models\DTO\ServiceCreateModel.cs" />
     <Compile Include="Models\EnterpriseInfo.cs" />
     <Compile Include="Models\FieldDescription.cs" />
     <Compile Include="Models\BaseModel.cs" />
@@ -247,8 +255,12 @@
     <Content Include="Areas\Admin\Views\Home\Index.cshtml" />
     <Content Include="Areas\Admin\Views\Home\ServiceManege.cshtml" />
     <Content Include="Areas\Admin\Views\Shared\_Admin1Layout.cshtml" />
-    <None Include="Project_Readme.html" />
     <None Include="Properties\PublishProfiles\Default Settings.pubxml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Migrations\201703121240072_init.resx">
+      <DependentUpon>201703121240072_init.cs</DependentUpon>
+    </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

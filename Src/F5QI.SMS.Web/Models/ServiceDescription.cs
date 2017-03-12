@@ -10,6 +10,8 @@ namespace F5QI.SMS.Web.Models
     {
         [Display(Name = "未知")]
         Unknown,
+        [Display(Name = "信息录入")]
+        InputInfomation,
 
     }
 

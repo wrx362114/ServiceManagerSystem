@@ -1,4 +1,6 @@
-﻿using System;
+﻿using F5QI.SMS.Web.Models;
+using Newtonsoft.Json.Converters;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -16,6 +18,15 @@ namespace F5QI.SMS.Web
             GlobalConfiguration.Configure(WebApiConfig.Register);
             FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);
             RouteConfig.RegisterRoutes(RouteTable.Routes);
+            var ef = SMSDbContext.Create();
+            ef.Database.CreateIfNotExists();
+            ef.Database.Initialize(true);
+            Newtonsoft.Json.JsonConvert.DefaultSettings = () =>
+            {
+                var s= new Newtonsoft.Json.JsonSerializerSettings();
+                s.Converters.Add(new StringEnumConverter());
+                return s;
+            };
         }
     }
 }

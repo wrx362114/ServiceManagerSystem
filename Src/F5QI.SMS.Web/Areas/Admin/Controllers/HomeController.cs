@@ -30,17 +30,17 @@ namespace F5QI.SMS.Web.Areas.Admin.Controllers
             };
             return View(model);
         }
-        public ActionResult ServiceManege(int pageindex = 1, int pagesize = 20)
+        public ActionResult ServiceManege(int page = 1, int pagesize = 20)
         {
             Tools.Enum2NameValueList(typeof(Web.Models.ServiceType)).ToList();
-            var ros = Db.Services.OrderByDescending(a=>a.Id).Skip((pageindex - 1) * pagesize).Take(pagesize);
+            var ros = Db.Services.OrderByDescending(a=>a.Id).Skip((page - 1) * pagesize).Take(pagesize);
             var model = new ServiceManegeViewModel(this)
             {
                 CurrentPage = "服务管理",
                 HeadImgUrl = "",
                 LoginUserName = "测试",
                 RowCount = Db.Services.Count(),
-                PageIndex = pageindex,
+                PageIndex = page,
                 PageSize = pagesize,
                 Services = ros.ToList()
             };
