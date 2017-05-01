@@ -1,9 +1,11 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 14
-VisualStudioVersion = 14.0.25420.1
+# Visual Studio 15
+VisualStudioVersion = 15.0.26228.10
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "F5QI.SMS.Web", "Src\F5QI.SMS.Web\F5QI.SMS.Web.csproj", "{43F26425-078A-45BF-AA6F-B7184DE6BDAA}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ConsoleApp1", "ConsoleApp1\ConsoleApp1.csproj", "{CA734363-A63E-4843-916A-54169EB5F297}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,6 +17,10 @@ Global
 		{43F26425-078A-45BF-AA6F-B7184DE6BDAA}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{43F26425-078A-45BF-AA6F-B7184DE6BDAA}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{43F26425-078A-45BF-AA6F-B7184DE6BDAA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CA734363-A63E-4843-916A-54169EB5F297}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CA734363-A63E-4843-916A-54169EB5F297}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CA734363-A63E-4843-916A-54169EB5F297}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CA734363-A63E-4843-916A-54169EB5F297}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

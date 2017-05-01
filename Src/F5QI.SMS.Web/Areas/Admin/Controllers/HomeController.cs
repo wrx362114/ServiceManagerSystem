@@ -24,7 +24,7 @@ namespace F5QI.SMS.Web.Areas.Admin.Controllers
         {
             var model = new Models.IndexViewModel(this)
             {
-                CurrentPage = "后台首页",
+                CurrentPage = "首页",
                 HeadImgUrl = "",
                 LoginUserName = "测试"
             };

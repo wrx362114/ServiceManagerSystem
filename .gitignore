@@ -241,3 +241,4 @@ ModelManifest.xml
 # FAKE - F# Make
 .fake/
 /F5QI.SMS/Src/F5QI.SMS.Web/Web.Release.config
+/ConsoleApp1

@@ -3,10 +3,13 @@
 <html>
 <head>
     <meta charset="utf-8">
-    <meta content="IE=edge,chrome=1" http-equiv="X-UA-Compatible" />
-    <title>AdminLTE 2 | @Model.CurrentPage</title>
-    <!-- Tell the browser to be responsive to screen width -->
-    <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
+    <title>@Model.CurrentPage</title>
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="format-detection" content="telephone=no">    
     <!-- Semantic UI -->
     <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.2.8/semantic.css" />
     <!-- Font Awesome -->
@@ -18,126 +21,71 @@
     <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
     <![endif]-->
 
+    <link href="~/Content/layui/css/layui.css" rel="stylesheet" />
+    <link href="~/Content/adminlayout.css" rel="stylesheet" />
 </head>
-<body class="hold-transition skin-blue sidebar-mini">
-    <div class="wrapper">
-        <header class="main-header">
-            <!-- Logo -->
-            <a href="@Url.Action("Index","Admin")" class="logo">
-                <!-- mini logo for sidebar mini 50x50 pixels -->
-                <span class="logo-mini"><b>A</b>LT</span>
-                <!-- logo for regular state and mobile devices -->
-                <span class="logo-lg"><b>Admin</b>LTE</span>
-            </a>
-            <!-- Header Navbar: style can be found in header.less -->
-            <nav class="navbar navbar-static-top" role="navigation">
-                <!-- Sidebar toggle button-->
-                <a href="#" class="sidebar-toggle" data-toggle="offcanvas" role="button">
-                    <span class="sr-only">Toggle navigation</span>
-                </a>
-                <div class="navbar-custom-menu">
-                    <ul class="nav navbar-nav">
-                        <li>
-                            <a href="@Url.Action("Logout","Login")">退出系统</a>
-                        </li>
-                    </ul>
-                </div>
-            </nav>
-        </header>
-        <!-- Left side column. contains the logo and sidebar -->
-        <aside class="main-sidebar">
-            <!-- sidebar: style can be found in sidebar.less -->
-            <section class="sidebar">
-                <!-- Sidebar user panel -->
-                <!-- sidebar menu: : style can be found in sidebar.less -->
-                <ul class="sidebar-menu">
-                    @foreach (var item in Model.Menu)
+<body>
+    <div class="f5-layout">
+        <div class="f5-header">
+            <div class="f5-main">
+            </div>
+        </div>
+        <div class="f5-menu">
+            <ul class="f5-nav f5-nav-tree">
+                @foreach (var item in Model.Menu)
+                {
+                    if (item.IsLable)
                     {
-                        if (item.IsLable)
-                        {
-                            <li class="header">@item.Title</li>
-                        }
-                        else
-                        {
-                            <li class="@(item.IsActive(Model.CurrentPage)?"active":"") @(item.IsTree?"treeview":"")">
-                                <a href="@item.Url">
-                                    <i class="@item.IcoClass"></i>
-                                    <span>@item.Title</span>
-                                    @if (item.IsTree)
-                                    {
-                                        <i class="fa fa-angle-left pull-right"></i>
-                                    }
-                                </a>
+                        <li class="f5-nav-item" style="height: 45px; text-align: center">@item.Title</li>
+                    }
+                    else
+                    {
+                        <li class="f5-nav-item @(item.IsActive(Model.CurrentPage)?(item.IsTree?"f5-nav-Open":"f5-this"): "")">
+                            <a href="@item.Url">
+                                <i class="@item.IcoClass"></i>
+                                @item.Title
                                 @if (item.IsTree)
                                 {
-                                    <ul class="treeview-menu">
-                                        @foreach (var child in item.Child)
-                                        {
-                                            <li class="@(child.IsActive(Model.CurrentPage)?"active":"")">
-                                                <a href="@child.Url">
-                                                    <i class="@child.IcoClass"></i>@child.Title
-                                                </a>
-                                            </li>
-                                        }
-                                    </ul>
+                                    <span class="layui-nav-more"></span>
                                 }
-                            </li>
-                        }
+                            </a>
+                            @if (item.IsTree)
+                            {
+                                <dl class="layui-nav-child ">
+                                    @foreach (var child in item.Child)
+                                    {
+                                        <dd class="@(child.IsActive(Model.CurrentPage)?("layui-this"):"")">
+                                            <a href="@child.Url"><i class="@child.IcoClass"></i>@child.Title</a>
+                                        </dd>
+                                    }
+                                </dl>
+                            }
+                        </li>
                     }
-                </ul>
-            </section>
+                }
+            </ul>
 
-            <!-- /.sidebar -->
-        </aside>
-
-        <!-- Content Wrapper. Contains page content -->
-        <div class="content-wrapper">
-            <!-- Content Header (Page header) -->
-            <section class="content-header">
-                <h1>
-                    @Model.CurrentPage
-                    <small>Control panel</small>
-                </h1>
-                <div class="ui breadcrumb">
-                    <a href="#" class="section"><i class="fa fa-dashboard"></i> Home</a>
-                    <div class="divider"> / </div>
-                    <div class="active  section">@Model.CurrentPage</div>
-                </div>
-            </section>
-
-            <!-- Main content -->
-            <section class="content">
-                @RenderBody()
-                <!-- Small boxes (Stat box) -->
-                <!-- /.row -->
-                <!-- Main row -->
-                <!-- /.row (main row) -->
-
-            </section>
-            <!-- /.content -->
         </div>
-        <!-- /.content-wrapper -->
-        <footer class="main-footer">
-            <div class="pull-right hidden-xs">
-                <b>Version</b> 0.0.1
+        <div class="body">
+            
+        </div>
+        <div class="footer">
+            <div class="layui-main">
+                <p>&copy; 2017 <a href="/">layui.com</a> MIT license</p>
             </div>
-            <strong>Copyright &copy; 2006-2017 <a href="http://www.f5qi.com">S Studio</a>.</strong> All rights
-            reserved.
-        </footer>
-        <div class="control-sidebar-bg"></div>
+        </div>
+         
     </div>
-    <!-- ./wrapper -->
-
     <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.js"></script>
     <script src="//cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.js"></script>
     <!-- Resolve conflict in jQuery UI tooltip with Bootstrap tooltip -->
     <script>
-        $.widget.bridge( 'uibutton', $.ui.button );
+        $.widget.bridge('uibutton', $.ui.button);
     </script>
     <script src="//cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.5/js/bootstrap.js"></script>
     <script src="//cdnjs.cloudflare.com/ajax/libs/knockout/3.4.1/knockout-min.js"></script>
     <script src="//cdnjs.cloudflare.com/ajax/libs/knockout-validation/2.0.3/knockout.validation.js"></script>
-    <script src="//cdnjs.cloudflare.com/ajax/libs/admin-lte/2.3.11/js/app.js"></script>
+
     @RenderSection("scripts", required: false)
 </body>
 </html>
