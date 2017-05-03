@@ -1,15 +1,19 @@
 ﻿@model F5QI.SMS.Web.Areas.Admin.Models.BaseViewModel
+@{
+    var hasSubMenu = Model.Menu.Any(a => a.IsActive(Model.CurrentPage) && a.Child != null && a.Child.Any());
+}
 <!DOCTYPE html>
-<html>
+<html lang="zh-CN">
 <head>
-    <meta charset="utf-8">
-    <title>@Model.CurrentPage</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="renderer" content="webkit">
+    <title>@Model.CurrentPage | Yeelink用户中心</title>
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
     <meta name="apple-mobile-web-app-status-bar-style" content="black">
     <meta name="apple-mobile-web-app-capable" content="yes">
-    <meta name="format-detection" content="telephone=no">    
+    <meta name="format-detection" content="telephone=no">
     <!-- Semantic UI -->
     <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.2.8/semantic.css" />
     <!-- Font Awesome -->
@@ -19,63 +23,130 @@
     <!--[if lt IE 9]>
     <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
     <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
-    <![endif]-->
-
-    <link href="~/Content/layui/css/layui.css" rel="stylesheet" />
+    <![endif]--> 
     <link href="~/Content/adminlayout.css" rel="stylesheet" />
 </head>
 <body>
-    <div class="f5-layout">
-        <div class="f5-header">
-            <div class="f5-main">
+    <div class="page">
+        <!--header begin-->
+        <header>
+            <div class="bigcontainer">
+                <div id="logo">
+                    <a href="./">yeelink用户中心</a>
+                </div>
+                <div class="user">
+                    <div class="ui inline labeled icon top right pointing dropdown">
+                        <img class="ui avatar image" src="resource/images/avatar-default.gif">
+                        欢迎，$用户名
+                        <i class="dropdown icon"></i>
+                        <div class="menu">
+                            <a class="item" href="http://www.yeelink.net"><i class="reply mail icon"></i>返回首页</a>
+                            <a class="item" href="/user/logout"><i class="sign out icon"></i>注销登录</a>
+                        </div>
+                    </div>
+                </div>
             </div>
-        </div>
-        <div class="f5-menu">
-            <ul class="f5-nav f5-nav-tree">
-                @foreach (var item in Model.Menu)
-                {
-                    if (item.IsLable)
+        </header>
+        <!-- the main menu-->
+        <div class="ui teal inverted menu fluid">
+            <div class="bigcontainer">
+                <div class="right menu">
+                    @foreach (var item in Model.Menu)
                     {
-                        <li class="f5-nav-item" style="height: 45px; text-align: center">@item.Title</li>
-                    }
-                    else
-                    {
-                        <li class="f5-nav-item @(item.IsActive(Model.CurrentPage)?(item.IsTree?"f5-nav-Open":"f5-this"): "")">
-                            <a href="@item.Url">
-                                <i class="@item.IcoClass"></i>
-                                @item.Title
-                                @if (item.IsTree)
-                                {
-                                    <span class="layui-nav-more"></span>
-                                }
-                            </a>
-                            @if (item.IsTree)
+                        <a class="item @(item.IsActive(Model.CurrentPage)?"active":"")" href="@(item.Url)">
+                            @if (!string.IsNullOrEmpty(item.IcoClass))
                             {
-                                <dl class="layui-nav-child ">
-                                    @foreach (var child in item.Child)
-                                    {
-                                        <dd class="@(child.IsActive(Model.CurrentPage)?("layui-this"):"")">
-                                            <a href="@child.Url"><i class="@child.IcoClass"></i>@child.Title</a>
-                                        </dd>
-                                    }
-                                </dl>
+                                <i class="@item.IcoClass"></i>
                             }
-                        </li>
+                            @item.Title
+                        </a>
                     }
-                }
-            </ul>
-
-        </div>
-        <div class="body">
-            
-        </div>
-        <div class="footer">
-            <div class="layui-main">
-                <p>&copy; 2017 <a href="/">layui.com</a> MIT license</p>
+                </div>
             </div>
         </div>
-         
+        <!--the main content begin-->
+        <div class="container">
+            <!--the content-->
+            @if (hasSubMenu)
+            {
+                <div class="ui grid">
+                    <!--the vertical menu-->
+                    <div class="four wide column">
+                        <div class="verticalMenu">
+                            <div class="ui vertical pointing menu fluid">
+                                @foreach (var item in Model.Menu)
+                                {
+                                    if (item.IsActive(Model.CurrentPage))
+                                    {
+                                        foreach (var subitem in item.Child)
+                                        {
+                                            <a class="item @(subitem.IsActive(Model.CurrentPage)?"active":"")" href="@(subitem.Url)">
+                                                @if (!string.IsNullOrEmpty(subitem.IcoClass))
+                                                {
+                                                    <i class="@subitem.IcoClass"></i>
+                                                }
+                                                @subitem.Title
+                                            </a>
+                                        }
+                                    }
+                                }
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="twelve wide column">
+                        <div class="pageHeader">
+                            <div class="segment">
+                                <h3 class="ui dividing header">
+                                    <i class="large add icon"></i>
+                                    <div class="content">
+                                        @Model.CurrentPage
+                                    </div>
+                                </h3>
+                            </div>
+                        </div>
+                        @RenderBody()
+                    </div>
+                </div>
+
+            }
+            else
+            {
+                <div class="pageHeader">
+                    <div class="segment">
+                        <h3 class="ui dividing header">
+                            <i class="large home icon"></i>
+                            <div class="content">
+                                @Model.CurrentPage
+                                @if (!string.IsNullOrEmpty(Model.CurrentMenu.Subtitle))
+                                {
+                                    <div class="sub header">@Model.CurrentMenu.Subtitle</div>
+                                }
+                            </div>
+                        </h3>
+                    </div>
+                </div>
+                @RenderBody()
+            }
+        </div>
+
     </div>
+    <!--footer begin-->
+    <footer>
+        <div id="copyrights">
+            <div class="inset">
+                <div class="bigcontainer">
+                    <div class="fl">
+                        <div class="logo"></div>
+                        <p>
+                            &copy; 2020 青岛亿联客信息技术有限公司, 版权所有<br />
+                            <a href="http://www.miibeian.gov.cn" target="_blank">鲁ICP备12022271号</a>
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
     <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.js"></script>
     <script src="//cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.js"></script>
     <!-- Resolve conflict in jQuery UI tooltip with Bootstrap tooltip -->
@@ -84,8 +155,7 @@
     </script>
     <script src="//cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.5/js/bootstrap.js"></script>
     <script src="//cdnjs.cloudflare.com/ajax/libs/knockout/3.4.1/knockout-min.js"></script>
-    <script src="//cdnjs.cloudflare.com/ajax/libs/knockout-validation/2.0.3/knockout.validation.js"></script>
-
+    <script src="//cdnjs.cloudflare.com/ajax/libs/knockout-validation/2.0.3/knockout.validation.js"></script> 
     @RenderSection("scripts", required: false)
 </body>
 </html>

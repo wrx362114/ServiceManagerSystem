@@ -24,7 +24,7 @@ namespace F5QI.SMS.Web.Areas.Admin.Models
                     new MenuItem {
                         Title="用户相关",
                         IcoClass="fa fa-users",
-                        Url="#" ,
+                        Url=controller.Url.Action(nameof(Controllers.HomeController.UserManege)) ,
                         Child=new[] { 
                             new MenuItem {
                                 Title="用户管理",
@@ -41,7 +41,7 @@ namespace F5QI.SMS.Web.Areas.Admin.Models
                     new MenuItem {
                         Title="系统设置",
                         IcoClass="fa fa-users",
-                        Url="#" ,
+                        Url=controller.Url.Action(nameof(Controllers.HomeController.ServiceManege)) ,
                         Child=new[] {
                             new MenuItem {
                                 Title="服务管理",
