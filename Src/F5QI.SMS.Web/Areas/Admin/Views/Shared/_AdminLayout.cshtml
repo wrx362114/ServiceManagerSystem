@@ -2,6 +2,11 @@
 @{
     var hasSubMenu = Model.Menu.Any(a => a.IsActive(Model.CurrentPage) && a.Child != null && a.Child.Any());
 }
+
+
+
+
+
 <!DOCTYPE html>
 <html lang="zh-CN">
 <head>
@@ -23,8 +28,9 @@
     <!--[if lt IE 9]>
     <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
     <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
-    <![endif]--> 
-    <link href="~/Content/adminlayout.css" rel="stylesheet" />
+    <![endif]-->
+    <link href="/Content/adminlayout.css" rel="stylesheet" />
+
 </head>
 <body>
     <div class="page">
@@ -48,7 +54,7 @@
             </div>
         </header>
         <!-- the main menu-->
-        <div class="ui teal inverted menu fluid">
+        <div class="ui teal inverted menu fluid main">
             <div class="bigcontainer">
                 <div class="right menu">
                     @foreach (var item in Model.Menu)
@@ -130,6 +136,7 @@
             }
         </div>
 
+
     </div>
     <!--footer begin-->
     <footer>
@@ -152,10 +159,22 @@
     <!-- Resolve conflict in jQuery UI tooltip with Bootstrap tooltip -->
     <script>
         $.widget.bridge('uibutton', $.ui.button);
+
     </script>
     <script src="//cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.5/js/bootstrap.js"></script>
     <script src="//cdnjs.cloudflare.com/ajax/libs/knockout/3.4.1/knockout-min.js"></script>
-    <script src="//cdnjs.cloudflare.com/ajax/libs/knockout-validation/2.0.3/knockout.validation.js"></script> 
+    <script src="//cdnjs.cloudflare.com/ajax/libs/knockout-validation/2.0.3/knockout.validation.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.2.8/semantic.js"></script>
+
+    <script>
+        $(document).ready(function () {
+            $('.ui.dropdown')
+                .dropdown();
+        });
+    </script>
     @RenderSection("scripts", required: false)
+
+
 </body>
 </html>
+

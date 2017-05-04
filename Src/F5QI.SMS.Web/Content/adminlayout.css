@@ -1,58 +1,4 @@
-﻿.container {
-    padding-right: 15px;
-    padding-left: 15px;
-    margin-right: auto;
-    margin-left: auto;
-}
-
-.bigcontainer {
-    margin: 0 auto;
-}
-
-    .bigcontainer:before, .container:before,
-    .bigcontainer:after, .container:after {
-        display: table;
-        content: " ";
-    }
-
-    .bigcontainer:after, .container:after {
-        clear: both;
-    }
-
-    .bigcontainer:before, .container:before,
-    .bigcontainer:after, .container:after {
-        display: table;
-        content: " ";
-    }
-
-    .bigcontainer:after, .container:after {
-        clear: both;
-    }
-
-@media (min-width: 992px) {
-    .container {
-        width: 970px;
-    }
-
-    .bigcontainer {
-        width: 1000px;
-    }
-}
-
-@media (min-width: 1200px) {
-    .container {
-        width: 1170px;
-    }
-
-    .bigcontainer {
-        width: 1200px;
-    }
-}
-
-
-
-
-/*framework edit*/
+﻿/*framework edit*/
 html {
     height: 100%;
     font-size: 100%;
@@ -193,7 +139,7 @@ header {
     float: left;
     width: 180px;
     height: 72px;
-    background: url(../images/logo.png) left center no-repeat;
+    background: url('/content/Semantic-Admin-Template/resource/images/logo.png') left center no-repeat;
 }
 
     #logo a {
@@ -543,7 +489,7 @@ footer {
     #copyrights .logo {
         width: 164px;
         height: 40px;
-        background: url(../images/logo_footer.png);
+        background: url('/content/Semantic-Admin-Template/resource/images/logo_footer.png'); 
         text-indent: -999em;
     }
 
@@ -557,3 +503,59 @@ footer {
         float: left;
     }
 
+.container {
+    padding-right: 15px;
+    padding-left: 15px;
+    margin-right: auto;
+    margin-left: auto;
+}
+
+.bigcontainer {
+    margin: 0 auto;
+}
+
+    .bigcontainer:before, .container:before,
+    .bigcontainer:after, .container:after {
+        display: table;
+        content: " ";
+    }
+
+    .bigcontainer:after, .container:after {
+        clear: both;
+    }
+
+    .bigcontainer:before, .container:before,
+    .bigcontainer:after, .container:after {
+        display: table;
+        content: " ";
+    }
+
+    .bigcontainer:after, .container:after {
+        clear: both;
+    }
+
+@media (min-width: 992px) {
+    .container {
+        width: 970px;
+    }
+
+    .bigcontainer {
+        width: 1000px;
+    }
+}
+
+@media (min-width: 1200px) {
+    .container {
+        width: 1170px;
+    }
+
+    .bigcontainer {
+        width: 1200px;
+    }
+}
+.ui.menu.main {  
+    margin-top: 0; 
+}
+.ui.menu .item.right, .ui.menu .menu.right {
+    float: right;
+}

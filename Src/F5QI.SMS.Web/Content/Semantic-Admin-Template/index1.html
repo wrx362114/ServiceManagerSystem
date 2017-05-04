@@ -1,74 +1,32 @@
-﻿<!doctype html>
+﻿
+
+<!DOCTYPE html>
 <html lang="zh-CN">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="renderer" content="webkit">
-    <title>管理首页 | Yeelink用户中心</title>
-    <style>
-        .f5-layout {
-            min-height: 100%;
-            width: 100%;
-            min-width: 1200px;
-            background: #fff;
-            box-shadow: 0px 4px 15px #181818;
-            padding-bottom: 16px;
-            padding-bottom: 1rem;
-        }
-        .container {
-            padding-right: 15px;
-            padding-left: 15px;
-            margin-right: auto;
-            margin-left: auto;
-        }
+    <title>首页 | Yeelink用户中心</title>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="format-detection" content="telephone=no">
+    <!-- Semantic UI -->
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.2.8/semantic.css" />
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css" />
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+    <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+    <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+    <link href="/Content/adminlayout.css" rel="stylesheet" />
 
-        .bigcontainer {
-            margin: 0 auto;
-        }
-
-            .bigcontainer:before, .container:before,
-            .bigcontainer:after, .container:after {
-                display: table;
-                content: " ";
-            }
-
-            .bigcontainer:after, .container:after {
-                clear: both;
-            }
-
-            .bigcontainer:before, .container:before,
-            .bigcontainer:after, .container:after {
-                display: table;
-                content: " ";
-            }
-
-            .bigcontainer:after, .container:after {
-                clear: both;
-            }
-
-        @media (min-width: 992px) {
-            .container {
-                width: 970px;
-            }
-
-            .bigcontainer {
-                width: 1000px;
-            }
-        }
-
-        @media (min-width: 1200px) {
-            .container {
-                width: 1170px;
-            }
-
-            .bigcontainer {
-                width: 1200px;
-            }
-        }
-    </style>
 </head>
 <body>
-    <div class="f5-layout">
+    <div class="page">
         <!--header begin-->
         <header>
             <div class="bigcontainer">
@@ -76,12 +34,6 @@
                     <a href="./">yeelink用户中心</a>
                 </div>
                 <div class="user">
-                    <div class="ui compact notif menu">
-                        <a class="item">
-                            <i class="mail large icon"></i>
-                            <span class="circular floating ui small red label"> 2 </span>
-                        </a>
-                    </div>
                     <div class="ui inline labeled icon top right pointing dropdown">
                         <img class="ui avatar image" src="resource/images/avatar-default.gif">
                         欢迎，$用户名
@@ -95,17 +47,31 @@
             </div>
         </header>
         <!-- the main menu-->
-        <div class="ui teal inverted menu">
+        <div class="ui teal inverted menu fluid main">
             <div class="bigcontainer">
                 <div class="right menu">
-                    <a class="active item" href="./index.html"><i class="home icon"></i>管理首页</a>
-                    <a class="item" href="./devices_list.html"><i class="sitemap icon"></i>设备</a>
-                    <a class="item" href="./product_list.html"><i class="cloud icon"></i>产品</a>
-                    <a class="item" href="./user_profile.html"><i class="info icon"></i>账户</a>
+                    <a class="item ">
+                        主菜单
+                    </a>
+                    <a class="item active" href="/Admin/home">
+                        <i class="fa fa-circle-o"></i>
+                        首页
+                    </a>
+                    <a class="item " href="/Admin/home/UserManege">
+                        <i class="fa fa-users"></i>
+                        用户相关
+                    </a>
+                    <a class="item " href="#">
+                        <i class="fa fa-users"></i>
+                        合同管理
+                    </a>
+                    <a class="item " href="/Admin/home/ServiceManege">
+                        <i class="fa fa-users"></i>
+                        系统设置
+                    </a>
                 </div>
             </div>
         </div>
-
         <!--the main content begin-->
         <div class="container">
             <!--the content-->
@@ -114,42 +80,13 @@
                     <h3 class="ui dividing header">
                         <i class="large home icon"></i>
                         <div class="content">
-                            管理首页
-                            <div class="sub header">快速查看和编辑</div>
+                            首页
                         </div>
                     </h3>
                 </div>
-            </div>
-            <div class="ui warning message">
-                <i class="close icon" data-dismiss="alert"></i>
-                <div class="header">
-                    <i class="warning icon"></i> 当前帐户还未激活.
-                </div>
-                未激活账户无法使用Yeelink服务，请检查注册时填写的邮箱，完成验证。
-                <a href="http://www.yeelink.net/login/resend_activate_mail" title="重新发送激活邮件">未收到激活邮件？</a>
-            </div>
-            <div class="ui small message" id="showApiKey">
-                <div class="ui form segment">
-                    <div class="inline field">
-                        <label>您的API Key :</label>
-                        <div class="ui small left icon input short">
-                            <i class="key icon"></i>
-                            <input type="text" value="793jIEGJjkjkljfUI3JRTJOIO" readonly="readonly" id="apiKey">
-                        </div>
-                        <a class="ui mini green button" id="copy-apiKey" href="#">复制</a>
-                        <a class="ui mini blue animated button" href=./apikey_manage.html>
-                            <span class="visible content">管理</span>
-                            <span class="hidden content">
-                                <i class="key icon"></i>
-                            </span>
-                        </a>
-                        <a id="deviceQuickButton" class="ui red small labeled icon button" href="./devices_list.html">
-                            <i class="settings icon"></i>管理所有设备
-                        </a>
-                    </div>
-                </div>
-            </div>
+            </div> 
         </div>
+
     </div>
     <!--footer begin-->
     <footer>
@@ -167,21 +104,25 @@
             </div>
         </div>
     </footer>
-
-    <script type="text/javascript" src="resource/javascript/jquery.min.js"></script>
-    <script type="text/javascript" src="resource/javascript/framework.js"></script>
-    <script type="text/javascript" src="resource/javascript/jquery.zclip.min.js"></script>
-    <script type="text/javascript" src="resource/javascript/alert.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.js"></script>
+    <!-- Resolve conflict in jQuery UI tooltip with Bootstrap tooltip -->
     <script>
-        $(document).ready(function () {
-            $('a#copy-apiKey').zclip({
-                path: 'resource/javascript/ZeroClipboard.swf',
-                copy: function () { return $('input#apiKey').val(); }
-            });
+                $.widget.bridge('uibutton', $.ui.button);
 
-            $('.ui.dropdown')
-                .dropdown();
-        });
     </script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.5/js/bootstrap.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/knockout/3.4.1/knockout-min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/knockout-validation/2.0.3/knockout.validation.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.2.8/semantic.js"></script>
+
+    <script>
+                $(document).ready(function () {
+                    $('.ui.dropdown')
+                        .dropdown();
+                });
+    </script>
+
+
 </body>
 </html>
