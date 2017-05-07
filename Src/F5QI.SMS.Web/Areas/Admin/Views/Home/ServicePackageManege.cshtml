@@ -1,6 +1,7 @@
-﻿@model F5QI.SMS.Web.Areas.Admin.Models.ServiceManegeViewModel
+﻿@model F5QI.SMS.Web.Areas.Admin.Models.ServicePackageManegeViewModel
 @using F5QI.SMS.Web.Common;
 @{
+
     Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
 }
 
@@ -13,9 +14,7 @@
                     <th>Id</th>
                     <th>名称</th>
                     <th>备注</th>
-                    <th>参考价格</th> 
-                    <th>配置项目</th>
-                    <th>类型</th>
+                    <th>参考价格</th>
                     <th>操作</th>
                 </tr>
             </thead>
@@ -25,10 +24,9 @@
                     <td data-bind="text:Name"></td>
                     <td data-bind="text:Remark"></td>
                     <td data-bind="text:Price"></td>
-                    <td data-bind="text:Config"></td>
-                    <td data-bind="text:$parent.TypeDisplay($data)"></td>
                     <td>
-                        <div class="mini ui buttons"> 
+                        <div class="mini ui buttons">
+                            <button class="ui button" data-bind="click:$parent.ShowServices">删除</button>
                             <button class="ui button" data-bind="click:$parent.Delete">删除</button>
                             <button class="ui button" data-bind="click:$parent.OpenChange">修改</button>
                         </div>
@@ -40,7 +38,7 @@
                     <th></th>
                     <th colspan="6">
                         <div class="ui small primary labeled icon button" onclick="OpenAdd()">
-                            <i class="user icon"></i> 添加服务
+                            <i class="user icon"></i> 添加套餐
                         </div>
                         @Html.Raw(Html.Pager("abc", Model.PageIndex, Model.PageSize, Model.RowCount, "mini ui floated pagination menu"))
                     </th>
@@ -51,12 +49,12 @@
     <div class="ui modal" id="AddModel">
         <i class="close icon"></i>
         <div class="header">
-            添加服务
+            添加套餐
         </div>
         <div class="content">
             <form class="ui form">
                 <div class="field">
-                    <label>服务名称</label>
+                    <label>套餐名称</label>
                     <input type="text" data-bind="value:TempModel.Name">
                 </div>
                 <div class="field">
@@ -64,21 +62,12 @@
                     <input type="text" data-bind="value:TempModel.Remark">
                 </div>
                 <div class="field">
-                    <label>价格</label>
+                    <label>总价格</label>
                     <div class="ui right labeled input">
                         <div class="ui label">$</div>
                         <input type="number" placeholder="Amount" data-bind="value:TempModel.Price">
                         <div class="ui basic label">.00</div>
                     </div>
-                </div>
-                <div class="field">
-                    <label>服务类型</label>
-                    <select class="ui dropdown" data-bind="options: Types,
-                           optionsText: 'Value',
-                           optionsValue:'Key',
-                           value: TempModel.Type,
-                           optionsCaption: TempModel.Type"></select>
-
                 </div>
             </form>
         </div>
@@ -112,14 +101,6 @@
                         <div class="ui basic label">.00</div>
                     </div>
                 </div>
-                <div class="field">
-                    <label>服务类型</label>
-                    <select class="ui dropdown" data-bind="options: Types,
-                           optionsText: 'Value',
-                           optionsValue:'Key',
-                           value: TempModel.Type,
-                           optionsCaption: TempModel.Type"></select>
-                </div>
             </form>
         </div>
         <div class="actions">
@@ -138,9 +119,20 @@
         }
 
         var dt = {
-            Rows:@Html.Raw(Newtonsoft.Json.JsonConvert.SerializeObject(Model.Services)),
+            Rows:@Html.Raw(Newtonsoft.Json.JsonConvert.SerializeObject(Model.ServicePackages)),
             RowCount:@Model.RowCount,
-            Types:@Html.Raw(Newtonsoft.Json.JsonConvert.SerializeObject(F5QI.SMS.Web.Common.Tools.Enum2NameValueList(typeof(F5QI.SMS.Web.Models.ServiceType))))
+            Types:@Html.Raw(Newtonsoft.Json.JsonConvert.SerializeObject(F5QI.SMS.Web.Common.Tools.Enum2NameValueList(typeof(F5QI.SMS.Web.Models.ServiceType)))),
+            Services:@Html.Raw(Newtonsoft.Json.JsonConvert.SerializeObject(Model.Services.Select(a=>new {
+                    a.Config,
+                    a.CreateTime,
+                    a.Id,
+                    a.Name,
+                    a.Price,
+                    a.Remark,
+                    a.SecurityStamp,
+                    a.Type,
+                    a.UpdateTime
+                })))
         };
         function ViewModel( datas ) {
             self = this;
@@ -150,9 +142,8 @@
                 Id:ko.observable( 0 ),
                 Name: ko.observable( "" ),
                 Remark: ko.observable( "" ),
-                Price: ko.observable( 0 ),
-                Type: ko.observable(""),
-                Config:ko.observable( "" )
+                Price: ko.observable(0),
+                Services: ko.observableArray([])//{ServiceId:1,Price:1,SequenceNumber:1}
             };
             self.SaveAdd = function () {
                 $.ajax({

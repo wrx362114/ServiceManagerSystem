@@ -14,7 +14,7 @@ namespace F5QI.SMS.Web.Apitrollers
     public class ServicesController : ApiController
     {
 
-        [Route(""), HttpPost]
+        [HttpPost]
         public ApiResult Add([FromBody]ServiceCreateModel model)
         {
             var ef = SMSDbContext.Create();

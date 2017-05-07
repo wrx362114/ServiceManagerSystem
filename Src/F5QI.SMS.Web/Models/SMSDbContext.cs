@@ -74,15 +74,10 @@ namespace F5QI.SMS.Web.Models
             bind.Property(a => a.Remark).IsOptional().IsVariableLength().IsUnicode().HasMaxLength(2048);
             bind.Property(a => a.Config).IsOptional().IsVariableLength().IsUnicode().IsMaxLength();
             bind.Property(a => a.Price).HasPrecision(18, 2);
-
             bind.HasMany(a => a.Packages)
-                .WithMany(a => a.Services)
-                .Map(a =>
-                {
-                    a.ToTable($"R_{nameof(ServiceDescription)}_{nameof(ServicePackage)}")
-                        .MapLeftKey($"{nameof(ServiceDescription)}Id")
-                        .MapRightKey($"{nameof(ServicePackage)}Id");
-                });
+                .WithRequired(a => a.Service)
+                .HasForeignKey(a => a.ServiceId)
+                .WillCascadeOnDelete(false);
         }
 
         public virtual IDbSet<ServicePackage> ServicePackages { get; set; }
@@ -94,15 +89,20 @@ namespace F5QI.SMS.Web.Models
 
             bind.Property(a => a.Name).IsVariableLength().IsUnicode().HasMaxLength(128);
             bind.Property(a => a.Remark).IsVariableLength().IsUnicode().HasMaxLength(2048);
+            bind.Property(a => a.Price).HasPrecision(18, 2);
+            bind.HasMany(a => a.Services)
+                .WithRequired(a => a.Package)
+                .HasForeignKey(a => a.PackageId)
+                .WillCascadeOnDelete(false);
+        }
 
-            //bind.HasMany(a => a.Services)
-            //    .WithMany(a => a.Packages)
-            //    .Map(a =>
-            //    {
-            //        a.ToTable($"R_{nameof(ServiceDescription)}_{nameof(ServicePackage)}")
-            //            .MapLeftKey($"{nameof(ServicePackage)}Id")
-            //            .MapRightKey($"{nameof(ServiceDescription)}Id");
-            //    })
+        public virtual IDbSet<R_ServiceDescription_ServicePackage> R_Service_Package { get; set; }
+        private void BindR_Service_Package(DbModelBuilder modelBuilder)
+        {
+            var bind = modelBuilder.Entity<R_ServiceDescription_ServicePackage>();
+            bind.HasKey(a => a.Id).Property(a => a.Id).HasDatabaseGeneratedOption(DatabaseGeneratedOption.Identity);
+            bind.Property(a => a.SecurityStamp).HasMaxLength(36).IsFixedLength().IsConcurrencyToken();
+            bind.Property(a => a.Price).HasPrecision(18, 2); 
         }
 
         public virtual IDbSet<ServiceContract> ServiceContracts { get; set; }
@@ -217,10 +217,11 @@ namespace F5QI.SMS.Web.Models
             BindServiceContractJobConfig(modelBuilder);
             BindServiceContractPaymentPlan(modelBuilder);
             BindServiceContractTemplate(modelBuilder);
+            BindR_Service_Package(modelBuilder);
             BindServicePackage(modelBuilder);
             BindServices(modelBuilder);
         }
-        
+
         public static SMSDbContext Create()
         {
             return new SMSDbContext();

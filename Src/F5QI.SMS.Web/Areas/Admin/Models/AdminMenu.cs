@@ -13,10 +13,6 @@ namespace F5QI.SMS.Web.Areas.Admin.Models
             return new[]
                 {
                     new MenuItem {
-                        Title="主菜单",
-                        IsLable=true
-                    },
-                    new MenuItem {
                         Title="首页",
                         Url= controller.Url.Action(nameof(Controllers.HomeController.Index)),
                         IcoClass="fa fa-circle-o"
@@ -49,8 +45,8 @@ namespace F5QI.SMS.Web.Areas.Admin.Models
                                 IcoClass="fa fa-circle-o"
                             },
                             new MenuItem {
-                                Title="套餐管理",
-                                Url=controller.Url.Action(nameof(Controllers.HomeController.UserManege)),
+                                Title="服务套餐管理",
+                                Url=controller.Url.Action(nameof(Controllers.HomeController.ServicePackageManege)),
                                 IcoClass="fa fa-circle-o"
                             }
                         }

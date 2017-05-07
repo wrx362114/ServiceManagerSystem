@@ -37,12 +37,13 @@ namespace F5QI.SMS.Web.Models
     public class ServiceContractServiceConfig : BaseModel
     {
         public long ContractId { get; set; }
-        public ServiceContract Contract { get; set; }
         public long ServiceId { get; set; }
-        public ServiceDescription Service { get; set; }
         public DateTime StartTime { get; set; }
         public DateTime EndTime { get; set; }
         public decimal Price { get; set; }
+        public long? PackageId { get; set; }
+        public ServiceContract Contract { get; set; }
+        public ServiceDescription Service { get; set; }
     }
     public class ServiceContractServicePackageConfig : BaseModel
     {
