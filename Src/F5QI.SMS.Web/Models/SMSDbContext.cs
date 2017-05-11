@@ -33,6 +33,7 @@ namespace F5QI.SMS.Web.Models
             bind.Property(a => a.Id).HasDatabaseGeneratedOption(DatabaseGeneratedOption.Identity);
             bind.Property(a => a.SecurityStamp).HasMaxLength(36).IsFixedLength().IsConcurrencyToken();
 
+            bind.ToTable(nameof(Fields));
             bind.Property(a => a.Name).IsVariableLength().IsUnicode().HasMaxLength(128);
             bind.HasMany(a => a.Groups)
                 .WithMany(a => a.Fields)
@@ -51,6 +52,7 @@ namespace F5QI.SMS.Web.Models
             bind.HasKey(a => a.Id).Property(a => a.Id).HasDatabaseGeneratedOption(DatabaseGeneratedOption.Identity);
             bind.Property(a => a.SecurityStamp).HasMaxLength(36).IsFixedLength().IsConcurrencyToken();
 
+            bind.ToTable(nameof(FieldGroups));
             bind.Property(a => a.Name).IsVariableLength().IsUnicode().HasMaxLength(128);
             bind.Property(a => a.Remark).IsVariableLength().IsUnicode().HasMaxLength(256);
             bind.HasMany(a => a.Users)
@@ -70,6 +72,7 @@ namespace F5QI.SMS.Web.Models
             bind.HasKey(a => a.Id).Property(a => a.Id).HasDatabaseGeneratedOption(DatabaseGeneratedOption.Identity);
             bind.Property(a => a.SecurityStamp).HasMaxLength(36).IsFixedLength().IsConcurrencyToken();
 
+            bind.ToTable(nameof(Services));
             bind.Property(a => a.Name).IsRequired().IsVariableLength().IsUnicode().HasMaxLength(128);
             bind.Property(a => a.Remark).IsOptional().IsVariableLength().IsUnicode().HasMaxLength(2048);
             bind.Property(a => a.Config).IsOptional().IsVariableLength().IsUnicode().IsMaxLength();
@@ -87,6 +90,7 @@ namespace F5QI.SMS.Web.Models
             bind.HasKey(a => a.Id).Property(a => a.Id).HasDatabaseGeneratedOption(DatabaseGeneratedOption.Identity);
             bind.Property(a => a.SecurityStamp).HasMaxLength(36).IsFixedLength().IsConcurrencyToken();
 
+            bind.ToTable(nameof(ServicePackages));
             bind.Property(a => a.Name).IsVariableLength().IsUnicode().HasMaxLength(128);
             bind.Property(a => a.Remark).IsVariableLength().IsUnicode().HasMaxLength(2048);
             bind.Property(a => a.Price).HasPrecision(18, 2);
@@ -102,7 +106,9 @@ namespace F5QI.SMS.Web.Models
             var bind = modelBuilder.Entity<R_ServiceDescription_ServicePackage>();
             bind.HasKey(a => a.Id).Property(a => a.Id).HasDatabaseGeneratedOption(DatabaseGeneratedOption.Identity);
             bind.Property(a => a.SecurityStamp).HasMaxLength(36).IsFixedLength().IsConcurrencyToken();
-            bind.Property(a => a.Price).HasPrecision(18, 2); 
+            bind.Property(a => a.Price).HasPrecision(18, 2);
+
+            bind.ToTable(nameof(R_Service_Package));
         }
 
         public virtual IDbSet<ServiceContract> ServiceContracts { get; set; }
@@ -112,6 +118,7 @@ namespace F5QI.SMS.Web.Models
             bind.HasKey(a => a.Id).Property(a => a.Id).HasDatabaseGeneratedOption(DatabaseGeneratedOption.Identity);
             bind.Property(a => a.SecurityStamp).HasMaxLength(36).IsFixedLength().IsConcurrencyToken();
 
+            bind.ToTable(nameof(ServiceContracts));
             bind.Property(a => a.Name).IsVariableLength().IsUnicode().HasMaxLength(128);
             bind.Property(a => a.Amount).HasPrecision(18, 2);
 
@@ -132,6 +139,7 @@ namespace F5QI.SMS.Web.Models
             bind.HasKey(a => a.Id).Property(a => a.Id).HasDatabaseGeneratedOption(DatabaseGeneratedOption.Identity);
             bind.Property(a => a.SecurityStamp).HasMaxLength(36).IsFixedLength().IsConcurrencyToken();
 
+            bind.ToTable(nameof(ServiceContractJobs));
             bind.Property(a => a.Config).IsOptional().IsVariableLength().IsUnicode().IsMaxLength();
         }
 
@@ -142,6 +150,7 @@ namespace F5QI.SMS.Web.Models
             bind.HasKey(a => a.Id).Property(a => a.Id).HasDatabaseGeneratedOption(DatabaseGeneratedOption.Identity);
             bind.Property(a => a.SecurityStamp).HasMaxLength(36).IsFixedLength().IsConcurrencyToken();
 
+            bind.ToTable(nameof(ServiceContractTemplates));
             bind.Property(a => a.Name).IsVariableLength().IsUnicode().HasMaxLength(128);
             bind.Property(a => a.Config).IsOptional().IsVariableLength().IsUnicode().IsMaxLength();
         }
@@ -153,6 +162,7 @@ namespace F5QI.SMS.Web.Models
             bind.HasKey(a => a.Id).Property(a => a.Id).HasDatabaseGeneratedOption(DatabaseGeneratedOption.Identity);
             bind.Property(a => a.SecurityStamp).HasMaxLength(36).IsFixedLength().IsConcurrencyToken();
 
+            bind.ToTable(nameof(ServiceContractPaymentPlans));
             bind.Property(a => a.Amount).HasPrecision(18, 2);
 
             bind.HasMany(a => a.Records)
@@ -169,6 +179,7 @@ namespace F5QI.SMS.Web.Models
             bind.HasKey(a => a.Id).Property(a => a.Id).HasDatabaseGeneratedOption(DatabaseGeneratedOption.Identity);
             bind.Property(a => a.SecurityStamp).HasMaxLength(36).IsFixedLength().IsConcurrencyToken();
 
+            bind.ToTable(nameof(PaymentRecords));
             bind.Property(a => a.Amount).HasPrecision(18, 2);
             bind.Property(a => a.ThirdPartyCode).IsVariableLength().IsUnicode().HasMaxLength(128);
 
@@ -181,6 +192,7 @@ namespace F5QI.SMS.Web.Models
             bind.HasKey(a => a.Id).Property(a => a.Id).HasDatabaseGeneratedOption(DatabaseGeneratedOption.Identity);
             bind.Property(a => a.SecurityStamp).HasMaxLength(36).IsFixedLength().IsConcurrencyToken();
 
+            bind.ToTable(nameof(OperationRecords));
             bind.Property(a => a.Params).IsVariableLength().IsUnicode().IsMaxLength();
 
         }
@@ -192,6 +204,7 @@ namespace F5QI.SMS.Web.Models
             bind.HasKey(a => a.Id).Property(a => a.Id).HasDatabaseGeneratedOption(DatabaseGeneratedOption.Identity);
             bind.Property(a => a.SecurityStamp).HasMaxLength(36).IsFixedLength().IsConcurrencyToken();
 
+            bind.ToTable(nameof(Enterprises));
             bind.Property(a => a.Name).IsVariableLength().IsUnicode().HasMaxLength(128);
             bind.HasRequired(m => m.UserInfo)
                 .WithMany(m => m.Enterprises)
