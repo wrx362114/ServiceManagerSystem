@@ -29,11 +29,7 @@ namespace F5QI.SMS.Web.Models
         private void BindFields(DbModelBuilder modelBuilder)
         {
             var bind = modelBuilder.Entity<FieldDescription>();
-            bind.HasKey(a => a.Id);
-            bind.Property(a => a.Id).HasDatabaseGeneratedOption(DatabaseGeneratedOption.Identity);
-            bind.Property(a => a.SecurityStamp).HasMaxLength(36).IsFixedLength().IsConcurrencyToken();
-
-            bind.ToTable(nameof(Fields));
+            BindBase(nameof(Fields), bind); 
             bind.Property(a => a.Name).IsVariableLength().IsUnicode().HasMaxLength(128);
             bind.HasMany(a => a.Groups)
                 .WithMany(a => a.Fields)
@@ -49,10 +45,8 @@ namespace F5QI.SMS.Web.Models
         private void BindFieldGroups(DbModelBuilder modelBuilder)
         {
             var bind = modelBuilder.Entity<FieldGroups>();
-            bind.HasKey(a => a.Id).Property(a => a.Id).HasDatabaseGeneratedOption(DatabaseGeneratedOption.Identity);
-            bind.Property(a => a.SecurityStamp).HasMaxLength(36).IsFixedLength().IsConcurrencyToken();
+            BindBase(nameof(FieldGroups), bind);
 
-            bind.ToTable(nameof(FieldGroups));
             bind.Property(a => a.Name).IsVariableLength().IsUnicode().HasMaxLength(128);
             bind.Property(a => a.Remark).IsVariableLength().IsUnicode().HasMaxLength(256);
             bind.HasMany(a => a.Users)
@@ -69,10 +63,8 @@ namespace F5QI.SMS.Web.Models
         private void BindServices(DbModelBuilder modelBuilder)
         {
             var bind = modelBuilder.Entity<ServiceDescription>();
-            bind.HasKey(a => a.Id).Property(a => a.Id).HasDatabaseGeneratedOption(DatabaseGeneratedOption.Identity);
-            bind.Property(a => a.SecurityStamp).HasMaxLength(36).IsFixedLength().IsConcurrencyToken();
+            BindBase(nameof(Services), bind);
 
-            bind.ToTable(nameof(Services));
             bind.Property(a => a.Name).IsRequired().IsVariableLength().IsUnicode().HasMaxLength(128);
             bind.Property(a => a.Remark).IsOptional().IsVariableLength().IsUnicode().HasMaxLength(2048);
             bind.Property(a => a.Config).IsOptional().IsVariableLength().IsUnicode().IsMaxLength();
@@ -87,10 +79,8 @@ namespace F5QI.SMS.Web.Models
         private void BindServicePackage(DbModelBuilder modelBuilder)
         {
             var bind = modelBuilder.Entity<ServicePackage>();
-            bind.HasKey(a => a.Id).Property(a => a.Id).HasDatabaseGeneratedOption(DatabaseGeneratedOption.Identity);
-            bind.Property(a => a.SecurityStamp).HasMaxLength(36).IsFixedLength().IsConcurrencyToken();
+            BindBase(nameof(ServicePackages), bind);
 
-            bind.ToTable(nameof(ServicePackages));
             bind.Property(a => a.Name).IsVariableLength().IsUnicode().HasMaxLength(128);
             bind.Property(a => a.Remark).IsVariableLength().IsUnicode().HasMaxLength(2048);
             bind.Property(a => a.Price).HasPrecision(18, 2);
@@ -104,21 +94,17 @@ namespace F5QI.SMS.Web.Models
         private void BindR_Service_Package(DbModelBuilder modelBuilder)
         {
             var bind = modelBuilder.Entity<R_ServiceDescription_ServicePackage>();
-            bind.HasKey(a => a.Id).Property(a => a.Id).HasDatabaseGeneratedOption(DatabaseGeneratedOption.Identity);
-            bind.Property(a => a.SecurityStamp).HasMaxLength(36).IsFixedLength().IsConcurrencyToken();
-            bind.Property(a => a.Price).HasPrecision(18, 2);
+            BindBase(nameof(R_Service_Package), bind);
 
-            bind.ToTable(nameof(R_Service_Package));
+            bind.Property(a => a.Price).HasPrecision(18, 2);
         }
 
         public virtual IDbSet<ServiceContract> ServiceContracts { get; set; }
         private void BindServiceContract(DbModelBuilder modelBuilder)
         {
             var bind = modelBuilder.Entity<ServiceContract>();
-            bind.HasKey(a => a.Id).Property(a => a.Id).HasDatabaseGeneratedOption(DatabaseGeneratedOption.Identity);
-            bind.Property(a => a.SecurityStamp).HasMaxLength(36).IsFixedLength().IsConcurrencyToken();
+            BindBase(nameof(ServiceContracts), bind);
 
-            bind.ToTable(nameof(ServiceContracts));
             bind.Property(a => a.Name).IsVariableLength().IsUnicode().HasMaxLength(128);
             bind.Property(a => a.Amount).HasPrecision(18, 2);
 
@@ -136,10 +122,8 @@ namespace F5QI.SMS.Web.Models
         private void BindServiceContractJobConfig(DbModelBuilder modelBuilder)
         {
             var bind = modelBuilder.Entity<ServiceContractJobConfig>();
-            bind.HasKey(a => a.Id).Property(a => a.Id).HasDatabaseGeneratedOption(DatabaseGeneratedOption.Identity);
-            bind.Property(a => a.SecurityStamp).HasMaxLength(36).IsFixedLength().IsConcurrencyToken();
+            BindBase(nameof(ServiceContractJobs), bind);
 
-            bind.ToTable(nameof(ServiceContractJobs));
             bind.Property(a => a.Config).IsOptional().IsVariableLength().IsUnicode().IsMaxLength();
         }
 
@@ -147,10 +131,8 @@ namespace F5QI.SMS.Web.Models
         private void BindServiceContractTemplate(DbModelBuilder modelBuilder)
         {
             var bind = modelBuilder.Entity<ServiceContractTemplate>();
-            bind.HasKey(a => a.Id).Property(a => a.Id).HasDatabaseGeneratedOption(DatabaseGeneratedOption.Identity);
-            bind.Property(a => a.SecurityStamp).HasMaxLength(36).IsFixedLength().IsConcurrencyToken();
+            BindBase(nameof(ServiceContractTemplates), bind);
 
-            bind.ToTable(nameof(ServiceContractTemplates));
             bind.Property(a => a.Name).IsVariableLength().IsUnicode().HasMaxLength(128);
             bind.Property(a => a.Config).IsOptional().IsVariableLength().IsUnicode().IsMaxLength();
         }
@@ -159,10 +141,8 @@ namespace F5QI.SMS.Web.Models
         private void BindServiceContractPaymentPlan(DbModelBuilder modelBuilder)
         {
             var bind = modelBuilder.Entity<ServiceContractPaymentPlan>();
-            bind.HasKey(a => a.Id).Property(a => a.Id).HasDatabaseGeneratedOption(DatabaseGeneratedOption.Identity);
-            bind.Property(a => a.SecurityStamp).HasMaxLength(36).IsFixedLength().IsConcurrencyToken();
+            BindBase(nameof(ServiceContractPaymentPlans), bind);
 
-            bind.ToTable(nameof(ServiceContractPaymentPlans));
             bind.Property(a => a.Amount).HasPrecision(18, 2);
 
             bind.HasMany(a => a.Records)
@@ -176,10 +156,8 @@ namespace F5QI.SMS.Web.Models
         private void BindPaymentRecord(DbModelBuilder modelBuilder)
         {
             var bind = modelBuilder.Entity<PaymentRecord>();
-            bind.HasKey(a => a.Id).Property(a => a.Id).HasDatabaseGeneratedOption(DatabaseGeneratedOption.Identity);
-            bind.Property(a => a.SecurityStamp).HasMaxLength(36).IsFixedLength().IsConcurrencyToken();
+            BindBase(nameof(PaymentRecords), bind);
 
-            bind.ToTable(nameof(PaymentRecords));
             bind.Property(a => a.Amount).HasPrecision(18, 2);
             bind.Property(a => a.ThirdPartyCode).IsVariableLength().IsUnicode().HasMaxLength(128);
 
@@ -189,10 +167,8 @@ namespace F5QI.SMS.Web.Models
         private void BindOperationRecord(DbModelBuilder modelBuilder)
         {
             var bind = modelBuilder.Entity<OperationRecord>();
-            bind.HasKey(a => a.Id).Property(a => a.Id).HasDatabaseGeneratedOption(DatabaseGeneratedOption.Identity);
-            bind.Property(a => a.SecurityStamp).HasMaxLength(36).IsFixedLength().IsConcurrencyToken();
 
-            bind.ToTable(nameof(OperationRecords));
+            BindBase(nameof(OperationRecords), bind); 
             bind.Property(a => a.Params).IsVariableLength().IsUnicode().IsMaxLength();
 
         }
@@ -201,10 +177,8 @@ namespace F5QI.SMS.Web.Models
         private void BindEnterpriseInfo(DbModelBuilder modelBuilder)
         {
             var bind = modelBuilder.Entity<EnterpriseInfo>();
-            bind.HasKey(a => a.Id).Property(a => a.Id).HasDatabaseGeneratedOption(DatabaseGeneratedOption.Identity);
-            bind.Property(a => a.SecurityStamp).HasMaxLength(36).IsFixedLength().IsConcurrencyToken();
+            BindBase(nameof(Enterprises), bind);
 
-            bind.ToTable(nameof(Enterprises));
             bind.Property(a => a.Name).IsVariableLength().IsUnicode().HasMaxLength(128);
             bind.HasRequired(m => m.UserInfo)
                 .WithMany(m => m.Enterprises)
@@ -233,6 +207,17 @@ namespace F5QI.SMS.Web.Models
             BindR_Service_Package(modelBuilder);
             BindServicePackage(modelBuilder);
             BindServices(modelBuilder);
+        }
+        private void BindBase<T>(string name, System.Data.Entity.ModelConfiguration.EntityTypeConfiguration<T> bind) where T : BaseModel
+        {
+            bind.HasKey(a => a.Id)
+                .Property(a => a.Id)
+                .HasDatabaseGeneratedOption(DatabaseGeneratedOption.Identity);
+            bind.Property(a => a.SecurityStamp)
+                .HasMaxLength(36)
+                .IsFixedLength()
+                .IsConcurrencyToken();
+            bind.ToTable(name);
         }
 
         public static SMSDbContext Create()

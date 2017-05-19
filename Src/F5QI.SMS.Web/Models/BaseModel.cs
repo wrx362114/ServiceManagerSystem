@@ -11,6 +11,8 @@ namespace F5QI.SMS.Web.Models
         public BaseModel()
         {
             SecurityStamp = Guid.NewGuid().ToString();
+            CreateTime = DateTime.Now;
+            UpdateTime = DateTime.Now;
         }
         public long Id { get; set; }
         public string SecurityStamp { get; set; }

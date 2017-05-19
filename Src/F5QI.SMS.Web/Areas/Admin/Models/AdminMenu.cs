@@ -14,17 +14,17 @@ namespace F5QI.SMS.Web.Areas.Admin.Models
                 {
                     new MenuItem {
                         Title="首页",
-                        Url= controller.Url.Action(nameof(Controllers.HomeController.Index)),
+                        Url= controller.Url.Action("Index","Home"),
                         IcoClass="fa fa-circle-o"
                     },
                     new MenuItem {
                         Title="用户相关",
                         IcoClass="fa fa-users",
-                        Url=controller.Url.Action(nameof(Controllers.HomeController.UserManege)) ,
-                        Child=new[] { 
+                        Url=controller.Url.Action("User","Home") ,
+                        Child=new[] {
                             new MenuItem {
                                 Title="用户管理",
-                                Url=controller.Url.Action(nameof(Controllers.HomeController.UserManege)),
+                                Url=controller.Url.Action("User","Home") ,
                                 IcoClass="fa fa-circle-o"
                             }
                         }
@@ -37,16 +37,16 @@ namespace F5QI.SMS.Web.Areas.Admin.Models
                     new MenuItem {
                         Title="系统设置",
                         IcoClass="fa fa-users",
-                        Url=controller.Url.Action(nameof(Controllers.HomeController.ServiceManege)) ,
+                        Url=controller.Url.Action("ServiceManege","Services") ,
                         Child=new[] {
                             new MenuItem {
                                 Title="服务管理",
-                                Url=controller.Url.Action(nameof(Controllers.HomeController.ServiceManege)),
+                                Url=controller.Url.Action("ServiceManege","Services") ,
                                 IcoClass="fa fa-circle-o"
                             },
                             new MenuItem {
                                 Title="服务套餐管理",
-                                Url=controller.Url.Action(nameof(Controllers.HomeController.ServicePackageManege)),
+                                Url=controller.Url.Action("ServicePackageManege","Services"),
                                 IcoClass="fa fa-circle-o"
                             }
                         }
