@@ -29,7 +29,7 @@ namespace F5QI.SMS.Web.Models
         private void BindFields(DbModelBuilder modelBuilder)
         {
             var bind = modelBuilder.Entity<FieldDescription>();
-            BindBase(nameof(Fields), bind); 
+            BindBase(nameof(Fields), bind);
             bind.Property(a => a.Name).IsVariableLength().IsUnicode().HasMaxLength(128);
             bind.HasMany(a => a.Groups)
                 .WithMany(a => a.Fields)
@@ -151,7 +151,6 @@ namespace F5QI.SMS.Web.Models
                 .WillCascadeOnDelete(false);
         }
 
-
         public virtual IDbSet<PaymentRecord> PaymentRecords { get; set; }
         private void BindPaymentRecord(DbModelBuilder modelBuilder)
         {
@@ -163,12 +162,12 @@ namespace F5QI.SMS.Web.Models
 
         }
 
-        public virtual IDbSet<OperationRecord> OperationRecords { get; set; }
+        public virtual IDbSet<UserOperationRecords> OperationRecords { get; set; }
         private void BindOperationRecord(DbModelBuilder modelBuilder)
         {
-            var bind = modelBuilder.Entity<OperationRecord>();
+            var bind = modelBuilder.Entity<UserOperationRecords>();
 
-            BindBase(nameof(OperationRecords), bind); 
+            BindBase(nameof(OperationRecords), bind);
             bind.Property(a => a.Params).IsVariableLength().IsUnicode().IsMaxLength();
 
         }
@@ -182,6 +181,19 @@ namespace F5QI.SMS.Web.Models
             bind.Property(a => a.Name).IsVariableLength().IsUnicode().HasMaxLength(128);
             bind.HasRequired(m => m.UserInfo)
                 .WithMany(m => m.Enterprises)
+                .HasForeignKey(m => m.UserId)
+                .WillCascadeOnDelete(false);
+
+        }
+
+        public virtual IDbSet<UserOperationRecords> UserOperationRecords { get; set; }
+        private void BindUserOperationRecords(DbModelBuilder modelBuilder)
+        {
+            var bind = modelBuilder.Entity<UserOperationRecords>();
+            BindBase(nameof(UserOperationRecords), bind);
+
+            bind.HasRequired(m => m.UserInfo)
+                .WithMany(m => m.OperationRecords)
                 .HasForeignKey(m => m.UserId)
                 .WillCascadeOnDelete(false);
 
@@ -207,6 +219,8 @@ namespace F5QI.SMS.Web.Models
             BindR_Service_Package(modelBuilder);
             BindServicePackage(modelBuilder);
             BindServices(modelBuilder);
+            BindEnterpriseInfo(modelBuilder);
+            BindUserOperationRecords(modelBuilder);
         }
         private void BindBase<T>(string name, System.Data.Entity.ModelConfiguration.EntityTypeConfiguration<T> bind) where T : BaseModel
         {

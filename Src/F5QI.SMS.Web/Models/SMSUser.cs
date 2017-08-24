@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using System.Security.Claims;
 using Microsoft.AspNet.Identity;
 using System.Data.Entity;
+using F5QI.SMS.Web.Models.Enums;
 
 namespace F5QI.SMS.Web.Models
 {
@@ -23,19 +24,11 @@ namespace F5QI.SMS.Web.Models
         public virtual ICollection<FieldGroups> InfoGroup { get; private set; }
         public virtual ICollection<ServiceContractJobConfig> ContractJobs { get; private set; }
         public virtual ICollection<EnterpriseInfo> Enterprises { get; private set; }
-
+        public virtual ICollection<UserOperationRecords> OperationRecords { get; private set; }
 
     }
 
     public class SMSRole : IdentityRole<long, SMSUserRole> { }
-
-    public enum Roles
-    {
-        Unknow,
-        Admin,
-        Client,
-        Accountant
-    }
 
     public class SMSUserLogin : IdentityUserLogin<long> { }
     public class SMSUserRole : IdentityUserRole<long> { }
@@ -45,6 +38,19 @@ namespace F5QI.SMS.Web.Models
         public SMSUserStore(DbContext context) : base(context)
         {
         }
+    }
+    public class UserOperationRecords : BaseModel
+    {
+
+        public OperationType Type { get; set; }
+
+        public long BusinessId { get; set; }
+
+        public long UserId { get; set; }
+
+        public SMSUser UserInfo { get; set; }
+
+        public string Params { get; set; }
     }
 
 }

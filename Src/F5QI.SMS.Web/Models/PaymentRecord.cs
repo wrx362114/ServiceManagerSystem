@@ -1,4 +1,5 @@
-﻿using System;
+﻿using F5QI.SMS.Web.Models.Enums;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -20,17 +21,5 @@ namespace F5QI.SMS.Web.Models
         public string ThirdPartyCode { get; set; }
         public long PaymentPlanId { get; set; }
         public ServiceContractPaymentPlan PaymentPlan { get; set; }
-    }
-
-    public enum PaymentType
-    {
-    }
-
-    public enum PaymentState
-    {
-    }
-
-    public enum PaymentMethod
-    {
     }
 }

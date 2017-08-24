@@ -1,4 +1,5 @@
-﻿using System;
+﻿using F5QI.SMS.Web.Models.Enums;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -96,16 +97,5 @@ namespace F5QI.SMS.Web.Models
         public bool IsPaid { get; set; }
 
         public virtual ICollection<PaymentRecord> Records { get; private set; }
-    }
-
-
-    public enum JobState
-    {
-    }
-    public enum ServiceContractTemplateType
-    {
-    }
-    public enum JobType
-    {
     }
 }

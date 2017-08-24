@@ -25,6 +25,7 @@
     <UseGlobalApplicationHostFile />
     <NuGetPackageImportStamp>
     </NuGetPackageImportStamp>
+    <Use64BitIISExpress />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -192,14 +193,21 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
-    <Compile Include="Models\AccountViewModels.cs" />
+    <Compile Include="Models\Enums\Roles.cs" />
+    <Compile Include="Models\Enums\ServiceContractTemplateType.cs" />
+    <Compile Include="Models\Enums\JobType.cs" />
+    <Compile Include="Models\Enums\JobState.cs" />
+    <Compile Include="Models\ViewModel\AccountViewModels.cs" />
     <Compile Include="Models\DTO\ServiceCreateModel.cs" />
     <Compile Include="Models\DTO\ServicePackageParamsModel.cs" />
     <Compile Include="Models\EnterpriseInfo.cs" />
+    <Compile Include="Models\Enums\PaymentType.cs" />
+    <Compile Include="Models\Enums\PaymentMethod.cs" />
+    <Compile Include="Models\Enums\PaymentState.cs" />
     <Compile Include="Models\FieldDescription.cs" />
     <Compile Include="Models\BaseModel.cs" />
-    <Compile Include="Models\ManageViewModels.cs" />
-    <Compile Include="Models\OperationRecord.cs" />
+    <Compile Include="Models\ViewModel\ManageViewModels.cs" />
+    <Compile Include="Models\Enums\OperationType.cs" />
     <Compile Include="Models\PaymentRecord.cs" />
     <Compile Include="Models\Pron91Page.cs" />
     <Compile Include="Models\ServiceContract.cs" />
